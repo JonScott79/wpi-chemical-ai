@@ -1,0 +1,39 @@
+:root{
+
+    /* Colors */
+
+    --primary:#AC2B37;
+    --primary-hover:#8E1E2B;
+
+    --background:#F4F6FA;
+    --surface:#FFFFFF;
+
+    --text:#1F2937;
+    --muted:#6B7280;
+
+    --border:#E5E7EB;
+
+    /* Layout */
+
+    --header-height:72px;
+    --footer-height:48px;
+
+    --panel-width:700px;
+
+    --radius:12px;
+
+    /* Effects */
+
+    --shadow:0 18px 45px rgba(0,0,0,.08);
+
+    --transition:.2s ease;
+
+    /* Typography */
+
+    --font:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+}
