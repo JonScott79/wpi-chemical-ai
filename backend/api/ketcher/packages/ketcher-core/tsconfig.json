@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "bundler",
+    "sourceMap": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "esnext",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["node", "jest"],
+    "paths": {
+      "src": ["./src"],
+      "src/*": ["./src/*"],
+      "domain/*": ["./src/domain/*"],
+      "application/*": ["./src/application/*"],
+      "infrastructure/*": ["./src/infrastructure/*"],
+      "utilities": ["./src/utilities"],
+      "types": ["./src/types"]
+    },
+    "jsx": "react",
+    "rootDir": "."
+  },
+  "include": ["src/**/*", "__tests__/**/*"],
+  "exclude": ["dist"]
+}
