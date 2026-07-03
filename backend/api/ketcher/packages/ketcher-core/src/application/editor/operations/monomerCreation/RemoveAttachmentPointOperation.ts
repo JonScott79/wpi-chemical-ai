@@ -1,1 +1,0 @@
-export { RemoveAttachmentPointOperation } from './AssignLeavingGroupAtomOperation';

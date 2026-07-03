@@ -1,39 +1,106 @@
+/* =====================================
+   WPI Predict Theme
+   -------------------------------------
+   Centralized design system.
+
+   Edit this file to change the
+   application's appearance.
+
+   Do NOT hardcode colors, fonts,
+   spacing, shadows, or animation
+   values in style.css.
+
+   Sections
+   --------
+   1. Fonts
+   2. Colors
+   3. Effects
+   4. Layout
+   5. Animation
+
+   Author: Jon Scott
+===================================== */
+
 :root{
 
-    /* Colors */
+/* =====================================
+   Fonts
+===================================== */
 
-    --primary:#AC2B37;
-    --primary-hover:#8E1E2B;
+    --font:"Inter",sans-serif;
+    --font-mono:"JetBrains Mono",monospace;
 
-    --background:#F4F6FA;
+/* =====================================
+   Colors
+===================================== */
+
+    /* --- Brand --- */
+
+    --primary:#B42626;
+    --primary-hover:#8F1C1C;
+
+    /* --- Backgrounds --- */
+
+    --background:#F5F7FA;
     --surface:#FFFFFF;
 
-    --text:#1F2937;
-    --muted:#6B7280;
+    --header-bg:rgba(255,255,255,.92);
+    --window-title-bg:#FAFAFA;
 
-    --border:#E5E7EB;
+    /* --- Text --- */
 
-    /* Layout */
+    --text:#1E293B;
+    --muted:#64748B;
 
-    --header-height:72px;
-    --footer-height:48px;
+    /* --- Borders --- */
 
-    --panel-width:700px;
+    --border:#D6DCE5;
 
-    --radius:12px;
+    /* --- Components --- */
 
-    /* Effects */
+    --draw:#CBD5E1;
+    --draw-hover:#B8C4D3;
 
-    --shadow:0 18px 45px rgba(0,0,0,.08);
+    --button-text:#FFFFFF;
 
-    --transition:.2s ease;
+/* =====================================
+   Effects
+===================================== */
 
-    /* Typography */
+    --shadow:0 12px 40px rgba(0,0,0,.08);
+    --focus-ring:0 0 0 3px rgba(180,38,38,.12);
 
-    --font:
-        "Inter",
-        "Segoe UI",
-        Arial,
-        sans-serif;
+/* =====================================
+   Layout
+===================================== */
 
+    --header-height:70px;
+    --footer-height:42px;
+
+    --header-padding:50px;
+    --footer-padding:30px;
+
+    --panel-width:720px;
+
+    --window-padding:35px;
+    --window-title-padding:16px 24px;
+
+    --control-height:52px;
+
+    --nav-gap:35px;
+    --form-gap:18px;
+
+    --radius:10px;
+
+/* =====================================
+   Animation
+===================================== */
+
+    --transition:.20s ease;
+/* =====================================
+   Images
+===================================== */
+
+	/*-- LOGO -- */
+	--logo-height: 150px;
 }

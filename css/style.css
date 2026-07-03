@@ -1,10 +1,33 @@
 @import url("theme.css");
 
+/* =====================================
+   NOTE TO DEVELOPERS
+-----------------------------------------
+
+This file defines COMPONENTS and LAYOUT.
+
+Do NOT hardcode:
+
+• Colors
+• Fonts
+• Shadows
+• Border Radius
+• Theme Dimensions
+• Animation Timing
+
+These belong in theme.css.
+
+===================================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
+
+/* =====================================
+   Base
+===================================== */
 
 body{
     font-family:var(--font);
@@ -17,45 +40,54 @@ body{
    Header
 ===================================== */
 
-/* --- Header --- */
-
 header{
     position:fixed;
     top:0;
     left:0;
+
     width:100%;
     height:var(--header-height);
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:0 50px;
-    background:rgba(255,255,255,.92);
+
+    padding:0 var(--header-padding);
+
+    background:var(--header-bg);
     backdrop-filter:blur(12px);
+
     border-bottom:1px solid var(--border);
+
     z-index:100;
 }
 
 /* --- Logo --- */
 
 .logo{
-    font-size:1.45rem;
-    font-weight:700;
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+    user-select:none;
 }
 
-.logo span{
-    color:var(--primary);
+.logo img{
+    display:block;
+    height:var(--logo-height);
+    width:auto;
 }
 
 /* --- Navigation --- */
 
 nav{
     display:flex;
-    gap:35px;
+    gap:var(--nav-gap);
 }
 
 nav a{
     color:var(--text);
     text-decoration:none;
+    font-weight:500;
     transition:var(--transition);
 }
 
@@ -69,43 +101,51 @@ nav a:hover{
 
 main{
     height:100vh;
+
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
 /* =====================================
-   Window
+   Application Window
 ===================================== */
-
-/* --- Window --- */
 
 .app-window{
     width:min(var(--panel-width),90vw);
+
     background:var(--surface);
+
     border:1px solid var(--border);
-    border-radius:16px;
+    border-radius:var(--radius);
+
     overflow:hidden;
+
     box-shadow:var(--shadow);
 }
 
 /* --- Title Bar --- */
 
 .window-title{
-    padding:16px 24px;
+    padding:var(--window-title-padding);
+
+    background:var(--window-title-bg);
+
+    border-bottom:1px solid var(--border);
+
     font-size:1.2rem;
     font-weight:600;
-    background:#FAFAFA;
-    border-bottom:1px solid var(--border);
 }
 
 /* --- Body --- */
 
 .window-body{
-    padding:35px;
+    padding:var(--window-padding);
+
     display:flex;
     flex-direction:column;
-    gap:18px;
+
+    gap:var(--form-gap);
 }
 
 /* =====================================
@@ -116,89 +156,294 @@ main{
 
 .input-group{
     display:flex;
+
     width:100%;
+
+    background:var(--surface);
+
     border:1px solid var(--border);
     border-radius:var(--radius);
+
     overflow:hidden;
-    background:#fff;
+
+    transition:var(--transition);
 }
 
 .input-group input{
     flex:1;
-    height:52px;
+
+    height:var(--control-height);
+
     padding:0 16px;
+
     border:none;
     outline:none;
-    font-size:1rem;
+
+    background:transparent;
+
+    color:var(--text);
+
+    font-family:var(--font-mono);
+    font-size:.95rem;
+}
+
+.input-group input::placeholder{
+    color:var(--muted);
+    font-family:var(--font);
+}
+
+/* --- Input Focus --- */
+
+.input-group:focus-within{
+    border-color:var(--primary);
+    box-shadow:var(--focus-ring);
 }
 
 /* --- Select --- */
 
 select{
     width:100%;
-    height:52px;
-    padding:0 16px;
+    height:var(--control-height);
+
+    padding:0 48px 0 16px;
+
+    background:var(--surface);
+
+    color:var(--text);
+
     border:1px solid var(--border);
     border-radius:var(--radius);
+
     outline:none;
-    font-size:1rem;
+
+    cursor:pointer;
+
+    font:inherit;
+
+    transition:var(--transition);
+
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+
+    /* SVG cannot currently use CSS variables */
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23475569' viewBox='0 0 16 16'%3E%3Cpath d='M3.2 5.5L8 10.3l4.8-4.8.9.9L8 12.1 2.3 6.4z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 16px center;
+}
+
+select:hover{
+    border-color:var(--draw-hover);
 }
 
 select:focus{
     border-color:var(--primary);
+    box-shadow:var(--focus-ring);
 }
 
 /* --- Buttons --- */
 
+.draw,
+.run{
+    font-family:var(--font);
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+}
+
 .draw{
     width:180px;
-    background:#CBD5E1;
-    color:#1E293B;
+
+    background:var(--draw);
+    color:var(--text);
+
     border:none;
     border-left:1px solid var(--border);
-    font-weight:500;
-    cursor:pointer;
-    transition:var(--transition);
 }
 
 .draw:hover{
-    background:#B8C4D3;
+    background:var(--draw-hover);
 }
 
 .run{
-    height:52px;
+    height:var(--control-height);
+
     background:var(--primary);
-    color:#fff;
+    color:var(--button-text);
+
     border:none;
     border-radius:var(--radius);
-    font-size:1rem;
-    font-weight:600;
-    cursor:pointer;
-    transition:var(--transition);
 }
 
 .run:hover{
     background:var(--primary-hover);
 }
 
+.draw:focus-visible,
+.run:focus-visible{
+    box-shadow:var(--focus-ring);
+}
+
 /* =====================================
    Footer
 ===================================== */
 
-/* --- Footer --- */
-
 footer{
     position:fixed;
+
     bottom:0;
     left:0;
+
     width:100%;
     height:var(--footer-height);
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:0 30px;
-    background:#fff;
+
+    padding:0 var(--footer-padding);
+
+    background:var(--surface);
+
     border-top:1px solid var(--border);
+
     color:var(--muted);
+
     font-size:.9rem;
+}
+
+/* =====================================
+   JSME Modal
+===================================== */
+
+.hidden{
+    display:none !important;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.35);
+
+    z-index:1000;
+}
+
+.modal-window{
+
+    width:760px;
+    max-width:95vw;
+
+    background:var(--surface);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.modal-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 24px;
+
+    background:var(--window-title-bg);
+
+    border-bottom:1px solid var(--border);
+}
+
+.modal-close{
+
+    background:none;
+    border:none;
+
+    font-size:1.6rem;
+
+    cursor:pointer;
+}
+
+.modal-body{
+    flex:1;
+    padding:16px;
+}
+
+#jsme_container{
+
+    width:700px;
+    height:380px;
+
+    margin:0 auto;
+
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+
+    overflow:hidden;
+}
+
+.modal-footer{
+
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+
+    padding:20px 24px;
+
+    border-top:1px solid var(--border);
+
+}
+.modal-footer button{
+
+    width:110px;
+    height:42px;
+
+    border:none;
+    border-radius:var(--radius);
+
+    font-family:var(--font);
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+#cancelJsme{
+
+    background:var(--draw);
+    color:var(--text);
+
+}
+
+#cancelJsme:hover{
+
+    background:var(--draw-hover);
+
+}
+
+#applyJsme{
+
+    background:var(--primary);
+    color:var(--button-text);
+
+}
+
+#applyJsme:hover{
+
+    background:var(--primary-hover);
+
 }
