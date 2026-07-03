@@ -30,10 +30,26 @@ These belong in theme.css.
 ===================================== */
 
 body{
+
     font-family:var(--font);
-    background:var(--background);
     color:var(--text);
-    overflow:hidden;
+
+    background-color:var(--background);
+
+    background-image:
+        url("/assets/images/chem-background.png");
+
+    background-repeat:no-repeat;
+
+    background-position:center;
+
+    background-size:min(1800px,100vw);
+
+    background-attachment:fixed;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
 }
 
 /* =====================================
@@ -100,11 +116,18 @@ nav a:hover{
 ===================================== */
 
 main{
-    height:100vh;
+
+    min-height:100vh;
 
     display:flex;
     justify-content:center;
     align-items:center;
+
+    padding:
+        calc(var(--header-height) + 20px)
+        20px
+        calc(var(--footer-height) + 20px);
+
 }
 
 /* =====================================
@@ -383,8 +406,9 @@ footer{
 
 #jsme_container{
 
-    width:700px;
-    height:380px;
+    width:100%;
+	max-width:700px;
+    height:50vh;
 
     margin:0 auto;
 
@@ -510,7 +534,6 @@ footer{
 #predictionModal .modal-body{
 
     max-height:400px;
-
     overflow-y:auto;
 
 }
@@ -518,9 +541,79 @@ footer{
 #outputContent{
 
     font-family:var(--font-mono);
-
     line-height:1.8;
-
     white-space:pre-wrap;
+
+}
+
+/* =====================================
+   Mobile
+===================================== */
+
+@media (max-width:768px){
+
+	header{
+
+		padding:0 16px;
+
+	}
+
+	nav{
+
+		gap:16px;
+
+	}
+
+	nav a{
+
+		font-size:.9rem;
+
+	}
+
+    .app-window{
+
+        width:min(95vw,700px);
+
+    }
+
+    .input-group{
+
+        flex-direction:column;
+
+    }
+
+    .draw{
+
+        width:100%;
+
+        border-left:none;
+        border-top:1px solid var(--border);
+
+    }
+
+    footer{
+
+        flex-direction:column;
+        justify-content:center;
+
+        gap:6px;
+        height:auto;
+        padding:14px;
+
+    }
+
+    .modal-window{
+
+        width:95vw;
+        height:90vh;
+
+    }
+
+    #jsme_container{
+
+        width:100%;
+        height:340px;
+
+    }
 
 }
