@@ -110,6 +110,107 @@ nav a{
 nav a:hover{
     color:var(--primary);
 }
+/* =====================================
+   Navigation Dropdown
+===================================== */
+
+.nav-dropdown{
+
+    position:relative;
+
+}
+
+.nav-button{
+
+    background:none;
+    border:none;
+
+    color:var(--text);
+
+    font:inherit;
+    font-weight:500;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.nav-button:hover{
+
+    color:var(--primary);
+
+}
+
+.dropdown-menu{
+
+    position:absolute;
+
+    top:40px;
+    left:0;
+
+    width:320px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    padding:16px;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    z-index:500;
+
+}
+
+.dropdown-section{
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+}
+
+.dropdown-section h4{
+
+    margin-bottom:6px;
+
+    color:var(--primary);
+
+    font-size:.9rem;
+
+}
+
+.dropdown-section a{
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    transition:var(--transition);
+
+}
+
+.dropdown-section a:hover{
+
+    color:var(--primary);
+
+    padding-left:6px;
+
+}
+
+.active{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
 
 /* =====================================
    Main

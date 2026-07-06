@@ -96,10 +96,3 @@ Waiting for backend prediction models.
     .addEventListener("click", closePrediction);
 
 });
-
-/* =====================================
-   Version
-===================================== */
-
-document.getElementById("version").textContent =
-    `${VERSION.stage} • ${VERSION.version}`;
