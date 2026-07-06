@@ -9,8 +9,9 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WPI Predict is a Worcester Polytechnic Institute research platform for machine learning-based molecular property prediction using SMILES chemical structures.">
 
-    <title>WPI Predict</title>
+    <title>WPI Predict | Molecular Property Prediction Research Platform</title>
 
     <!-- =====================================
          Styles
@@ -41,96 +42,151 @@
 
 <main id="main-content">
 
-    <section
-        class="app-window"
-        aria-labelledby="pageTitle">
+    <!-- =====================================
+         Hero
+    ====================================== -->
 
-        <h1
-            id="pageTitle"
-            class="window-title">
+    <section class="hero">
 
-            Molecular Property Prediction
+        <div class="intro">
 
-        </h1>
+            <h1>WPI Predict</h1>
 
-        <div class="window-body">
+            <p class="tagline">
+                Machine Learning for Molecular Property Prediction
+            </p>
 
-            <!-- Input -->
+            <p>
+                WPI Predict is an academic research platform developed at
+                <strong>Worcester Polytechnic Institute</strong> that predicts
+                molecular properties from SMILES chemical structures using
+                experimentally trained machine learning models.
+            </p>
 
-            <div class="input-group">
+            <p>
+                Select a prediction model from the <strong>Models</strong> menu,
+                enter a valid SMILES string, and run a prediction.
+            </p>
 
-                <label
-                    for="smiles"
-                    class="sr-only">
+            <p class="example">
+                <strong>Example SMILES:</strong>
+                <code>CCO</code> (Ethanol) •
+                <code>O</code> (Water) •
+                <code>c1ccccc1</code> (Benzene)
+            </p>
 
-                    SMILES Formula
+        </div>
 
-                </label>
+        <section class="app-window" aria-labelledby="pageTitle">
 
-                <input
-                    id="smiles"
-                    type="text"
-                    placeholder="SMILES Formula"
-                    autocomplete="off">
+            <h2 id="pageTitle" class="window-title">
+                Run Prediction
+            </h2>
+
+            <div class="window-body">
+
+			<div class="input-group">
+
+				<label for="smiles" class="sr-only">
+					SMILES Formula
+				</label>
+
+				<input
+					id="smiles"
+					type="text"
+					placeholder="Enter or paste a SMILES string..."
+					autocomplete="off">
+
+				<button
+					id="drawButton"
+					class="draw"
+					type="button"
+					aria-label="Open molecular editor">
+
+					Draw
+
+				</button>
+
+			</div>
+
+                <div
+                    id="smilesValidation"
+                    class="validation-message"
+                    aria-live="polite">
+                </div>
 
                 <button
-                    id="drawButton"
-                    class="draw"
-                    type="button"
-                    aria-label="Open molecular editor">
+                    id="runPrediction"
+                    class="run"
+                    type="button">
 
-                    Draw Molecule
+                    Run Prediction
 
                 </button>
 
             </div>
-			
-			<!-- Data Validation -->
-			<div
-			id="smilesValidation"
-			class="validation-message"
-			aria-live="polite">
-			</div>
 
-            <!-- Prediction Model -->
+        </section>
 
-            <label
-                for="predictionModel"
-                class="sr-only">
+    </section>
 
-                Prediction Model
+    <!-- =====================================
+         Information
+    ====================================== -->
 
-            </label>
+    <section class="information">
 
-            <select id="predictionModel">
+        <div class="info-grid">
 
-                <option value="" selected disabled>
-                    Select Prediction Model
-                </option>
+            <div class="info-box">
 
-                <option>LogP</option>
-                <option>Boiling Point</option>
-                <option>Melting Point</option>
-                <option>Enthalpy of Vaporization</option>
-                <option>Enthalpy of Fusion</option>
-                <option>Hansen Parameters</option>
+                <h2>Instructions</h2>
 
-            </select>
+                <ol>
 
-            <!-- Run -->
+                    <li>Select a prediction model from the <strong>Models</strong> menu.</li>
+                    <li>Enter or paste a valid SMILES string.</li>
+                    <li>Click <strong>Run Prediction</strong>.</li>
+                    <li>Review the prediction results.</li>
 
-			<button
-				id="runPrediction"
-				class="run"
-				type="button">
+                </ol>
 
-				Run Prediction
+            </div>
 
-			</button>
+            <div class="info-box">
 
-		</div>
+                <h2>Current Prediction Models</h2>
 
-	</section>
+                <ul>
+
+                    <li>LogP</li>
+                    <li>Boiling Point</li>
+                    <li>Melting Point</li>
+                    <li>Enthalpy of Vaporization</li>
+                    <li>Enthalpy of Fusion</li>
+                    <li>Hansen Solubility Parameters</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="seo">
+
+            <strong>Research Notice</strong>
+
+            <p>
+                WPI Predict is an academic research platform under active
+                development. Prediction models are intended for research,
+                educational, and computational chemistry applications.
+                Predictions should be used to support research workflows and
+                should not replace experimental measurements.
+            </p>
+
+        </div>
+
+    </section>
 
 </main>
 
@@ -139,6 +195,80 @@
 ===================================== -->
 
 <div id="footer-placeholder"></div>
+
+<!-- =====================================
+     Prediction Modal
+===================================== -->
+
+<div
+    id="predictionModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="predictionTitle">
+
+    <div class="modal-window">
+
+        <div class="modal-header">
+
+            <h2 id="predictionTitle">
+                Prediction Results
+            </h2>
+
+            <button
+                id="closePrediction"
+                class="modal-close"
+                type="button"
+                aria-label="Close prediction results">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div id="outputContent">
+                Waiting for prediction...
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                id="copyOutput"
+                class="draw"
+                type="button">
+
+                Copy
+
+            </button>
+
+            <button
+                id="printOutput"
+                class="draw"
+                type="button">
+
+                Print
+
+            </button>
+
+            <button
+                id="closePredictionFooter"
+                class="run"
+                type="button">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- =====================================
      JSME Modal
@@ -156,9 +286,7 @@
         <div class="modal-header">
 
             <h2 id="jsmeTitle">
-
                 Draw Molecule
-
             </h2>
 
             <button
@@ -206,98 +334,16 @@
 </div>
 
 <!-- =====================================
-     Prediction Modal
-===================================== -->
-
-<div
-    id="predictionModal"
-    class="modal hidden"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="predictionTitle">
-
-    <div class="modal-window">
-
-        <div class="modal-header">
-
-            <h2 id="predictionTitle">
-
-                Prediction Results
-
-            </h2>
-
-            <button
-                id="closePrediction"
-                class="modal-close"
-                type="button"
-                aria-label="Close prediction results">
-
-                ✕
-
-            </button>
-
-        </div>
-
-        <div class="modal-body">
-
-            <div id="outputContent">
-
-                Waiting for prediction...
-
-            </div>
-
-        </div>
-
-        <div class="modal-footer">
-
-            <button
-                id="copyOutput"
-                class="draw"
-                type="button">
-
-                Copy
-
-            </button>
-
-            <button
-                id="printOutput"
-                class="draw"
-                type="button">
-
-                Print
-
-            </button>
-
-            <button
-                id="closePredictionFooter"
-                class="run"
-                type="button">
-
-                Close
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =====================================
      Scripts
 ===================================== -->
-
 <script src="backend/api/jsme/jsme/jsme.nocache.js"></script>
+<script src="js/jsme.js"></script>
 
 <script src="js/version.js"></script>
-
 <script src="js/components.js"></script>
-
-<script src="js/jsme.js"></script>
 <script src="js/api.js"></script>
 <script src="js/validation.js"></script>
 <script src="js/app.js"></script>
 
 </body>
-
 </html>

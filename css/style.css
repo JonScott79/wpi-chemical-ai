@@ -40,11 +40,8 @@ body{
         url("/assets/images/chem-background.png");
 
     background-repeat:no-repeat;
-
     background-position:center;
-
     background-size:min(1800px,100vw);
-
     background-attachment:fixed;
 
     overflow-x:hidden;
@@ -56,62 +53,157 @@ body{
    Header
 ===================================== */
 
+
 header{
+
     position:fixed;
+
     top:0;
     left:0;
 
     width:100%;
     height:var(--header-height);
 
-    display:flex;
-    justify-content:space-between;
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+
     align-items:center;
 
     padding:0 var(--header-padding);
 
     background:var(--header-bg);
-    backdrop-filter:blur(12px);
 
     border-bottom:1px solid var(--border);
+	
+	z-index: 2;
 
-    z-index:100;
 }
 
-/* --- Logo --- */
+/* =====================================
+   Logo
+===================================== */
 
 .logo{
+
     display:flex;
     align-items:center;
-    text-decoration:none;
-    user-select:none;
+
 }
 
 .logo img{
+
     display:block;
+
     height:var(--logo-height);
     width:auto;
+
 }
 
-/* --- Navigation --- */
+/* =====================================
+   Navigation
+===================================== */
 
 nav{
+
     display:flex;
-    gap:var(--nav-gap);
+    justify-content:flex-end;
+    align-items:center;
+
+    flex:1;
+
+    gap:10px;
+
+    margin-left:40px;
+
 }
 
-nav a{
-    color:var(--text);
-    text-decoration:none;
-    font-weight:500;
-    transition:var(--transition);
-}
-
-nav a:hover{
-    color:var(--primary);
-}
 /* =====================================
-   Navigation Dropdown
+   Navigation Links
+===================================== */
+
+nav a,
+.nav-button{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    height:48px;
+
+    padding:0 10px;
+
+    background:transparent;
+    border:none;
+    border-radius:0;
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    font:inherit;
+    font-size:1.08rem;
+    font-weight:600;
+
+    cursor:pointer;
+
+    position:relative;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.90),
+        0 -1px 1px rgba(0,0,0,.12);
+
+    transition:
+        color .20s ease,
+        transform .20s ease,
+        text-shadow .20s ease;
+
+}
+
+/* Hover */
+
+nav a:hover,
+.nav-button:hover{
+
+    color:var(--primary);
+
+    transform:
+        translateY(-2px)
+        scale(1.04);
+
+    text-shadow:
+        0 1px 0 #ffffff,
+        0 2px 2px rgba(0,0,0,.18),
+        0 6px 12px rgba(0,0,0,.22);
+
+}
+
+/* Active */
+
+nav a.active,
+.nav-button.active{
+
+    color:var(--primary);
+
+    text-shadow:
+        0 1px 0 #ffffff,
+        0 2px 2px rgba(0,0,0,.22),
+        0 8px 14px rgba(180,38,38,.20);
+
+}
+
+/* Click */
+
+nav a:active,
+.nav-button:active{
+
+    transform:
+        translateY(0)
+        scale(.98);
+
+}
+
+/* =====================================
+   Dropdown
 ===================================== */
 
 .nav-dropdown{
@@ -122,23 +214,7 @@ nav a:hover{
 
 .nav-button{
 
-    background:none;
-    border:none;
-
-    color:var(--text);
-
-    font:inherit;
-    font-weight:500;
-
-    cursor:pointer;
-
-    transition:var(--transition);
-
-}
-
-.nav-button:hover{
-
-    color:var(--primary);
+    gap:6px;
 
 }
 
@@ -146,25 +222,28 @@ nav a:hover{
 
     position:absolute;
 
-    top:40px;
+    top:54px;
     left:0;
 
-    width:320px;
+    width:340px;
 
-    background:var(--surface);
-
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-
-    box-shadow:var(--shadow);
-
-    padding:16px;
+    padding:18px;
 
     display:flex;
     flex-direction:column;
     gap:18px;
 
-    z-index:500;
+    background:rgba(255,255,255,.96);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid var(--border);
+    border-radius:16px;
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.12);
+
+    z-index:1000;
 
 }
 
@@ -172,13 +251,14 @@ nav a:hover{
 
     display:flex;
     flex-direction:column;
-    gap:8px;
+
+    gap:6px;
 
 }
 
 .dropdown-section h4{
 
-    margin-bottom:6px;
+    margin-bottom:4px;
 
     color:var(--primary);
 
@@ -188,27 +268,30 @@ nav a:hover{
 
 .dropdown-section a{
 
-    text-decoration:none;
+    display:block;
+
+    padding:8px 12px;
+
+    border-radius:8px;
 
     color:var(--text);
 
-    transition:var(--transition);
+    text-decoration:none;
+
+    transition:
+        background .18s ease,
+        color .18s ease,
+        padding-left .18s ease;
 
 }
 
 .dropdown-section a:hover{
 
-    color:var(--primary);
-
-    padding-left:6px;
-
-}
-
-.active{
+    background:#F5F7FA;
 
     color:var(--primary);
 
-    font-weight:600;
+    padding-left:18px;
 
 }
 
@@ -217,18 +300,13 @@ nav a:hover{
 ===================================== */
 
 main{
+    max-width:1100px;
+    margin:0 auto;
 
-    min-height:100vh;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:
-        calc(var(--header-height) + 20px)
-        20px
-        calc(var(--footer-height) + 20px);
-
+	padding:
+		calc(var(--header-height) + 1px)
+		24px
+		calc(var(--footer-height) + 17px);
 }
 
 /* =====================================
@@ -236,7 +314,7 @@ main{
 ===================================== */
 
 .app-window{
-    width:min(var(--panel-width),90vw);
+    width:100%;
 
     background:var(--surface);
 
@@ -270,6 +348,109 @@ main{
     flex-direction:column;
 
     gap:var(--form-gap);
+}
+
+/* =====================================
+   Homepage Content
+===================================== */
+
+.hero{
+    width:min(900px,95vw);
+    margin:8px auto 0;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.intro{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+
+    padding:26px;
+
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+}
+
+.intro h1{
+    font-size:2.4rem;
+    color:var(--primary);
+
+    margin:0;
+}
+
+.tagline{
+    font-size:1.15rem;
+    font-weight:600;
+
+    color:var(--muted);
+}
+
+.intro p{
+    line-height:1.65;
+    max-width:760px;
+}
+
+.example{
+    margin-top:8px;
+    padding-top:12px;
+
+    border-top:1px solid var(--border);
+
+    font-size:.95rem;
+    color:var(--muted);
+}
+
+.example code{
+    font-family:var(--font-mono);
+    background:rgba(0,0,0,.05);
+    padding:2px 6px;
+    border-radius:6px;
+}
+
+.information{
+    width:min(900px,95vw);
+    margin:24px auto 0;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.info-box{
+    padding:22px;
+    background:rgba(255,255,255,.92);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    backdrop-filter:blur(8px);
+}
+
+.info-box h2{
+    margin-bottom:14px;
+    color:var(--primary);
+}
+
+.info-box ol,
+.info-box ul{
+    margin-left:20px;
+    line-height:1.7;
+}
+
+.seo{
+    margin-top:20px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    line-height:1.7;
+    color:var(--muted);
 }
 
 /* =====================================
@@ -416,6 +597,7 @@ select:focus{
 ===================================== */
 
 footer{
+
     position:fixed;
 
     bottom:0;
@@ -424,8 +606,9 @@ footer{
     width:100%;
     height:var(--footer-height);
 
-    display:flex;
-    justify-content:space-between;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+
     align-items:center;
 
     padding:0 var(--footer-padding);
@@ -437,6 +620,38 @@ footer{
     color:var(--muted);
 
     font-size:.9rem;
+
+}
+
+footer span{
+
+    display:flex;
+    align-items:center;
+
+    position:relative;
+    top:2px;
+
+}
+
+#version{
+
+    justify-self:start;
+    justify-content:flex-start;
+
+}
+
+.footer-center{
+
+    justify-self:center;
+    justify-content:center;
+
+}
+
+.footer-right{
+
+    justify-self:end;
+    justify-content:flex-end;
+
 }
 
 /* =====================================

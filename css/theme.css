@@ -74,33 +74,44 @@
    Layout
 ===================================== */
 
-    --header-height:70px;
-    --footer-height:42px;
+    /* Header / Footer */
 
-    --header-padding:50px;
-    --footer-padding:30px;
+    --header-height:50px;
+    --footer-height:17px;
+
+    --header-padding:0 28px;
+    --footer-padding:0 24px;
+
+    /* Logo */
+
+    --logo-height:40px;
+
+    /* Application */
 
     --panel-width:720px;
 
-    --window-padding:35px;
-    --window-title-padding:16px 24px;
+    --window-padding:28px;
+    --window-title-padding:16px 22px;
 
-    --control-height:52px;
+    /* Controls */
 
-    --nav-gap:35px;
-    --form-gap:18px;
+    --control-height:50px;
 
-    --radius:10px;
+    /* Navigation */
+
+    --nav-gap: 8px;
+
+    /* Forms */
+
+    --form-gap:16px;
+
+    /* Corners */
+
+    --radius:12px;
 
 /* =====================================
    Animation
 ===================================== */
 
     --transition:.20s ease;
-/* =====================================
-   Images
-===================================== */
-
-	/*-- LOGO -- */
-	--logo-height: 150px;
 }
