@@ -1038,6 +1038,54 @@ footer span{
 }
 
 /* =====================================
+   Research Downloads
+===================================== */
+
+.downloads-table{
+
+    width:100%;
+
+    margin-top:18px;
+
+    border-collapse:collapse;
+
+}
+
+.downloads-table th{
+
+    padding:14px;
+
+    text-align:left;
+
+    background:rgba(0,0,0,.04);
+
+    color:var(--primary);
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.downloads-table td{
+
+    padding:14px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.downloads-table tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+.downloads-table tr:hover{
+
+    background:rgba(0,0,0,.025);
+
+}
+
+/* =====================================
    Mobile
 ===================================== */
 

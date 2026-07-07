@@ -32,31 +32,240 @@
          Main Content
     ====================================== -->
 
-    <main>
+	 <main>
 
-        <div class="app-window">
+		<section class="information">
 
-            <div class="window-title">
+			<!-- =====================================
+				 Introduction
+			====================================== -->
 
-                Page Title
+			<div class="team-intro info-box">
 
-            </div>
+				<h1>Research Workbench</h1>
 
-            <div class="window-body">
+				<p class="team-tagline">
+					Batch molecular property prediction for research workflows.
+				</p>
 
-                <h2>Coming Soon</h2>
+				<p>
 
-                <p>
+					The Research Workbench is designed for researchers working
+					with large molecular datasets. Upload a dataset or paste
+					multiple SMILES structures, configure prediction options,
+					and export results for further analysis.
 
-                    This section is currently under development.
+				</p>
 
-                </p>
+			</div>
 
-            </div>
+			<!-- =====================================
+				 Workspace
+			====================================== -->
 
-        </div>
+			<div class="info-grid">
 
-    </main>
+				<!-- Input -->
+
+				<div class="info-box">
+
+					<h2>Input</h2>
+
+					<div class="input-group">
+
+						<input
+							type="text"
+							placeholder="Drag & Drop CSV or Browse Files..."
+							readonly>
+
+						<button class="draw">
+
+							Browse
+
+						</button>
+
+					</div>
+
+					<p style="margin-top:16px;">
+
+						or paste multiple SMILES strings:
+
+					</p>
+
+					<textarea
+						rows="10"
+						placeholder="CCO&#10;O&#10;c1ccccc1&#10;...">
+
+					</textarea>
+
+				</div>
+
+				<!-- Settings -->
+
+				<div class="info-box">
+
+					<h2>Prediction Settings</h2>
+
+					<select>
+
+						<option>Choose Prediction Model</option>
+
+					</select>
+
+					<br><br>
+
+					<label>
+						<input type="checkbox" checked>
+						Export CSV
+					</label>
+
+					<br>
+
+					<label>
+						<input type="checkbox">
+						Export JSON
+					</label>
+
+					<br>
+
+					<label>
+						<input type="checkbox">
+						Confidence Scores
+					</label>
+
+					<br>
+
+					<label>
+						<input type="checkbox">
+						Molecular Descriptors
+					</label>
+
+					<br><br>
+
+					<button class="run">
+
+						Run Batch Prediction
+
+					</button>
+
+				</div>
+
+			</div>
+
+			<!-- =====================================
+				 Jobs
+			====================================== -->
+
+			<div class="info-box" style="margin-top:20px;">
+
+				<h2>Job Queue</h2>
+
+				<p>
+
+					Batch jobs will appear here while processing.
+
+				</p>
+
+				<table class="downloads-table">
+
+					<thead>
+
+						<tr>
+
+							<th>Job</th>
+							<th>Status</th>
+							<th>Progress</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+
+						<tr>
+
+							<td>No Active Jobs</td>
+
+							<td>—</td>
+
+							<td>—</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+
+			</div>
+
+			<!-- =====================================
+				 Results
+			====================================== -->
+
+			<div class="info-box" style="margin-top:20px;">
+
+				<h2>Recent Results</h2>
+
+				<table class="downloads-table">
+
+					<thead>
+
+						<tr>
+
+							<th>Date</th>
+
+							<th>Prediction Model</th>
+
+							<th>Molecules</th>
+
+							<th>Status</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+
+						<tr>
+
+							<td colspan="4">
+
+								No completed jobs.
+
+							</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+
+			</div>
+
+			<!-- =====================================
+				 Future
+			====================================== -->
+
+			<div class="seo">
+
+				<strong>Future Capabilities</strong>
+
+				<p>
+
+					The Research Workbench is designed to grow alongside the
+					WPI Predict platform. Planned features include automatic
+					dataset validation, asynchronous job processing, result
+					history, downloadable reports, confidence metrics,
+					comparative model analysis, and support for researcher-
+					supplied prediction models.
+
+				</p>
+
+			</div>
+
+		</section>
+
+	</main>
 
     <!-- Shared Footer -->
 
