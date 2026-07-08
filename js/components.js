@@ -26,9 +26,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         "components/footer.html"
     );
 
-    initializeNavigation();
-
-    initializeVersion();
+	initializeNavigation();
+	initializeActivePage();
+	initializeVersion();
 
 });
 
@@ -77,5 +77,35 @@ function initializeVersion(){
 
     version.textContent =
         `${VERSION.stage} • ${VERSION.version}`;
+
+}
+
+/* =====================================
+   Active Navigation
+===================================== */
+
+function initializeActivePage(){
+
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop() || "index.html";
+
+    document.querySelectorAll("nav > a").forEach(link => {
+
+        if(link.getAttribute("href") === currentPage){
+
+            link.classList.add("active");
+
+            link.removeAttribute("href");
+
+            link.setAttribute(
+                "aria-current",
+                "page"
+            );
+
+        }
+
+    });
 
 }
