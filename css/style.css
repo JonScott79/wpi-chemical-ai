@@ -79,6 +79,32 @@ header{
 
 }
 
+.logo a{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    text-decoration:none;
+
+}
+
+.wpi-seal{
+	margin-left:12px;
+    height:32px;
+    width:auto;
+
+    flex-shrink:0;
+
+}
+
+.wpipredict-logo{
+
+    height:var(--logo-height);
+    width:auto;
+
+}
+
 /* =====================================
    Logo
 ===================================== */
@@ -199,99 +225,6 @@ nav a:active,
     transform:
         translateY(0)
         scale(.98);
-
-}
-
-/* =====================================
-   Dropdown
-===================================== */
-
-.nav-dropdown{
-
-    position:relative;
-
-}
-
-.nav-button{
-
-    gap:6px;
-
-}
-
-.dropdown-menu{
-
-    position:absolute;
-
-    top:54px;
-    left:0;
-
-    width:340px;
-
-    padding:18px;
-
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-
-    background:rgba(255,255,255,.96);
-
-    backdrop-filter:blur(18px);
-
-    border:1px solid var(--border);
-    border-radius:16px;
-
-    box-shadow:
-        0 18px 40px rgba(0,0,0,.12);
-
-    z-index:1000;
-
-}
-
-.dropdown-section{
-
-    display:flex;
-    flex-direction:column;
-
-    gap:6px;
-
-}
-
-.dropdown-section h4{
-
-    margin-bottom:4px;
-
-    color:var(--primary);
-
-    font-size:.9rem;
-
-}
-
-.dropdown-section a{
-
-    display:block;
-
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    color:var(--text);
-
-    text-decoration:none;
-
-    transition:
-        background .18s ease,
-        color .18s ease,
-        padding-left .18s ease;
-
-}
-
-.dropdown-section a:hover{
-
-    background:#F5F7FA;
-
-    color:var(--primary);
-
-    padding-left:18px;
 
 }
 
@@ -427,6 +360,9 @@ main{
 }
 
 .info-box{
+	display:flex;
+    flex-direction:column;
+	
     padding:22px;
     background:rgba(255,255,255,.92);
     border:1px solid var(--border);
@@ -643,7 +579,32 @@ footer span{
 .footer-center{
 
     justify-self:center;
+
+}
+
+.footer-center a{
+
+    display:flex;
+    align-items:center;
     justify-content:center;
+    gap:10px;
+
+    color:inherit;
+    text-decoration:none;
+
+}
+
+.footer-center a:hover{
+
+    text-decoration:underline;
+
+}
+
+.footer-center a:focus-visible{
+
+    outline:2px solid var(--primary);
+    outline-offset:4px;
+    border-radius:4px;
 
 }
 
@@ -1085,9 +1046,7 @@ footer span{
 
 }
 
-/* =====================================
-   Mobile
-===================================== */
+
 
 @media (max-width:768px){
 
@@ -1154,5 +1113,137 @@ footer span{
         height:340px;
 
     }
+
+}
+
+/* =====================================
+   Workbench
+===================================== */
+
+.info-grid{
+
+    align-items:stretch;
+
+}
+
+.info-grid .info-box{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+textarea{
+
+    width:100%;
+    min-height:160px;
+
+    margin-top:10px;
+    margin-bottom:16px;
+
+    padding:16px;
+
+    resize:vertical;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+
+    color:var(--text);
+
+    font-family:var(--font-mono);
+    font-size:.95rem;
+    line-height:1.6;
+
+    outline:none;
+
+    transition:var(--transition);
+
+}
+
+textarea::placeholder{
+
+    color:var(--muted);
+    font-family:var(--font);
+
+}
+
+textarea:hover{
+
+    border-color:var(--draw-hover);
+
+}
+
+textarea:focus{
+
+    border-color:var(--primary);
+    box-shadow:var(--focus-ring);
+
+}
+
+/* =====================================
+   Workbench Buttons
+===================================== */
+
+#drawButton,
+#runBatchPrediction{
+
+    width:100%;
+    margin-top:auto;
+
+}
+
+/* =====================================
+   Prediction Settings
+===================================== */
+
+.settings-content{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:20px;
+
+    flex:1;
+
+}
+
+.settings-group{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.settings-group h3{
+
+    margin:0;
+
+    color:var(--text);
+
+    font-size:1rem;
+    font-weight:600;
+
+}
+
+.settings-group label{
+
+    display:flex;
+    align-items:center;
+
+    gap:8px;
+
+    cursor:pointer;
+
+}
+
+.settings-group + .settings-group{
+
+    padding-top:18px;
+
+    border-top:1px solid var(--border);
 
 }

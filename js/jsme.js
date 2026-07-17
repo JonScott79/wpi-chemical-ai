@@ -21,15 +21,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const modal = document.getElementById("jsmeModal");
 
+    // If this page doesn't use JSME, exit quietly.
+    if (!modal) {
+        return;
+    }
+
     const drawButton = document.getElementById("drawButton");
-
     const closeButton = document.getElementById("closeJsme");
-
     const cancelButton = document.getElementById("cancelJsme");
-
     const applyButton = document.getElementById("applyJsme");
-
-    const smilesInput = document.getElementById("smiles");
 
     // Always start hidden
     modal.classList.add("hidden");
@@ -49,11 +49,11 @@ window.addEventListener("DOMContentLoaded", () => {
             // laid out by the browser.
             requestAnimationFrame(() => {
 
-				jsmeApplet = new JSApplet.JSME(
-					"jsme_container",
-					"700px",
-					"380px"
-				);
+                jsmeApplet = new JSApplet.JSME(
+                    "jsme_container",
+                    "700px",
+                    "380px"
+                );
 
             });
 
@@ -72,7 +72,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     closeButton.addEventListener("click", closeModal);
-
     cancelButton.addEventListener("click", closeModal);
 
     /* ================================
@@ -81,9 +80,36 @@ window.addEventListener("DOMContentLoaded", () => {
 
     applyButton.addEventListener("click", () => {
 
-        if (jsmeApplet) {
+        if (!jsmeApplet) {
 
-            smilesInput.value = jsmeApplet.smiles();
+            closeModal();
+            return;
+
+        }
+
+        const smiles = jsmeApplet.smiles();
+
+        // Home page (single prediction)
+        const singleInput = document.getElementById("smiles");
+
+        if (singleInput) {
+
+            singleInput.value = smiles;
+
+        }
+
+        // Batch page (append to textarea)
+        const batchInput = document.getElementById("smilesBatch");
+
+        if (batchInput) {
+
+            if (batchInput.value.trim() !== "") {
+
+                batchInput.value += "\n";
+
+            }
+
+            batchInput.value += smiles;
 
         }
 

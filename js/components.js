@@ -26,42 +26,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         "components/footer.html"
     );
 
-	initializeNavigation();
 	initializeActivePage();
 	initializeVersion();
 
 });
-
-/* =====================================
-   Navigation
-===================================== */
-
-function initializeNavigation(){
-
-    const modelsButton =
-        document.getElementById("modelsButton");
-
-    const modelsMenu =
-        document.getElementById("modelsMenu");
-
-    if(!modelsButton || !modelsMenu)
-        return;
-
-    modelsButton.addEventListener("click", e => {
-
-        e.stopPropagation();
-
-        modelsMenu.classList.toggle("hidden");
-
-    });
-
-    document.addEventListener("click", () => {
-
-        modelsMenu.classList.add("hidden");
-
-    });
-
-}
 
 /* =====================================
    Version

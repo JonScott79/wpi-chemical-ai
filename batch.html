@@ -86,17 +86,28 @@
 
 					</div>
 
-					<p style="margin-top:16px;">
-
-						or paste multiple SMILES strings:
-
-					</p>
+					<label for="smilesBatch" style="margin-top:16px; display:block; font-weight:600;">
+						Paste one SMILES structure per line
+					</label>
 
 					<textarea
-						rows="10"
-						placeholder="CCO&#10;O&#10;c1ccccc1&#10;...">
-
+						id="smilesBatch"
+						rows="2"
+						placeholder="CCO
+									O
+									c1ccccc1
+									CC(C)O
+						">
 					</textarea>
+
+					<button
+						id="drawButton"
+						class="run"
+						type="button">
+
+						Draw Molecule
+
+					</button>
 
 				</div>
 
@@ -106,50 +117,58 @@
 
 					<h2>Prediction Settings</h2>
 
-					<select>
+					<div class="settings-content">
 
-						<option>Choose Prediction Model</option>
+						<select>
 
-					</select>
+							<option>Choose Prediction Model</option>
 
-					<br><br>
+						</select>
 
-					<label>
-						<input type="checkbox" checked>
-						Export CSV
-					</label>
+						<div class="settings-group">
 
-					<br>
+							<h3>Output</h3>
 
-					<label>
-						<input type="checkbox">
-						Export JSON
-					</label>
+							<label>
+								<input type="checkbox" checked>
+								Export CSV
+							</label>
 
-					<br>
+							<label>
+								<input type="checkbox">
+								Export JSON
+							</label>
 
-					<label>
-						<input type="checkbox">
-						Confidence Scores
-					</label>
+						</div>
 
-					<br>
+						<div class="settings-group">
 
-					<label>
-						<input type="checkbox">
-						Molecular Descriptors
-					</label>
+							<h3>Include</h3>
 
-					<br><br>
+							<label>
+								<input type="checkbox">
+								Confidence Scores
+							</label>
 
-					<button class="run">
+							<label>
+								<input type="checkbox">
+								Molecular Descriptors
+							</label>
+
+						</div>
+
+					</div>
+
+					<button
+						id="runBatchPrediction"
+						class="run"
+						type="button">
 
 						Run Batch Prediction
 
 					</button>
 
 				</div>
-
 			</div>
 
 			<!-- =====================================
@@ -271,19 +290,68 @@
 
     <div id="footer-placeholder"></div>
 
+	<!-- JSME Modal -->
+
+	<div
+		id="jsmeModal"
+		class="modal hidden"
+		role="dialog"
+		aria-modal="true">
+
+		<div class="modal-window">
+
+			<div class="modal-header">
+
+				<h2>Draw Molecule</h2>
+
+				<button
+					id="closeJsme"
+					class="modal-close">
+
+					✕
+
+				</button>
+
+			</div>
+
+			<div class="modal-body">
+
+				<div id="jsme_container"></div>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button
+					id="cancelJsme"
+					class="draw">
+
+					Cancel
+
+				</button>
+
+				<button
+					id="applyJsme"
+					class="run">
+
+					Add to Batch
+
+				</button>
+
+			</div>
+
+		</div>
+
+	</div>
     <!-- =====================================
          Scripts
     ====================================== -->
 
     <script src="js/version.js"></script>
     <script src="js/components.js"></script>
-
-    <!-- Page-specific scripts go below -->
-
-    <!--
-    <script src="js/app.js"></script>
-    -->
-
+	
+	<script src="backend/api/jsme/jsme/jsme.nocache.js"></script>
+	<script src="js/jsme.js"></script>
 </body>
 
 </html>
