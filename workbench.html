@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>WPI Predict</title>
+
+    <!-- Styles -->
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Shared Header -->
+
+    <div id="header-placeholder"></div>
+
+    <!-- =====================================
+         Main Content
+    ====================================== -->
+
+	 <main>
+
+		<section class="information">
+
+			<!-- =====================================
+				 Introduction
+			====================================== -->
+
+			<div class="team-intro info-box">
+
+				<h1>Research Workbench</h1>
+
+				<p class="team-tagline">
+					Batch molecular property prediction for research workflows.
+				</p>
+
+				<p>
+
+					The Research Workbench is designed for researchers working
+					with large molecular datasets. Upload a dataset or paste
+					multiple SMILES structures, configure prediction options,
+					and export results for further analysis.
+
+				</p>
+
+			</div>
+
+			<!-- =====================================
+				 Workspace
+			====================================== -->
+
+			<div class="info-grid">
+
+				<!-- Input -->
+
+				<div class="info-box">
+
+					<h2>Input</h2>
+
+					<div class="input-group">
+
+						<input
+							type="text"
+							placeholder="Drag & Drop CSV or Browse Files..."
+							readonly>
+
+						<button class="draw">
+
+							Browse
+
+						</button>
+
+					</div>
+
+					<label for="smilesBatch" style="margin-top:16px; display:block; font-weight:600;">
+						Paste one SMILES structure per line
+					</label>
+
+					<textarea
+						id="smilesBatch"
+						rows="10"
+						placeholder="CCO&#10;O&#10;c1ccccc1&#10;CC(C)O">
+					</textarea>
+
+					<button
+						id="drawButton"
+						class="run"
+						type="button">
+
+						Draw Molecule
+
+					</button>
+
+				</div>
+
+				<!-- Settings -->
+
+				<div class="info-box">
+
+					<h2>Prediction Settings</h2>
+
+					<div class="settings-content">
+
+						<select id="predictionModel">
+
+							<option>Loading Models...</option>
+
+						</select>
+
+						<div class="settings-group">
+
+							<h3>Output</h3>
+
+							<label>
+								<input
+									id="exportCSV"
+									type="checkbox"
+									checked>
+								Export CSV
+							</label>
+
+							<label>
+								<input
+									id="exportJSON"
+									type="checkbox">
+								Export JSON
+							</label>
+
+						</div>
+
+						<div class="settings-group">
+
+							<h3>Include</h3>
+
+							<label>
+								<input type="checkbox">
+								Confidence Scores
+							</label>
+
+							<label>
+								<input type="checkbox">
+								Molecular Descriptors
+							</label>
+
+						</div>
+
+					</div>
+
+					<button
+						id="runBatchPrediction"
+						class="run"
+						type="button">
+
+						Run Prediction
+
+					</button>
+
+				</div>
+			</div>
+			<!-- =====================================
+				 Results
+			====================================== -->
+
+			<div class="info-box" style="margin-top:20px;">
+
+				<h2>Prediction Results</h2>
+
+				<table class="downloads-table">
+
+					<thead>
+
+						<tr>
+
+							<th>SMILES</th>
+
+							<th>Formula</th>
+
+							<th>LogP</th>
+
+							<th>Status</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody id="resultsTable">
+
+					</tbody>
+
+				</table>
+
+			</div>
+			
+			<!-- =====================================
+				 Jobs
+			====================================== -->
+
+			<div class="info-box" style="margin-top:20px;">
+
+				<h2>Job Queue</h2>
+
+				<p>
+
+					Batch jobs will appear here while processing.
+
+				</p>
+
+				<table class="downloads-table">
+
+					<thead>
+
+						<tr>
+
+							<th>Job</th>
+							<th>Status</th>
+							<th>Progress</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+
+						<tr>
+
+							<td>No Active Jobs</td>
+
+							<td>—</td>
+
+							<td>—</td>
+
+						</tr>
+
+					</tbody>
+
+				</table>
+
+			</div>
+
+			<!-- =====================================
+				 Future
+			====================================== -->
+
+			<div class="seo">
+
+				<strong>Future Capabilities</strong>
+
+				<p>
+
+					The Research Workbench is designed to grow alongside the
+					WPI Predict platform. Planned features include automatic
+					dataset validation, asynchronous job processing, result
+					history, downloadable reports, confidence metrics,
+					comparative model analysis, and support for researcher-
+					supplied prediction models.
+
+				</p>
+
+			</div>
+
+		</section>
+
+	</main>
+
+    <!-- Shared Footer -->
+
+    <div id="footer-placeholder"></div>
+
+	<!-- JSME Modal -->
+
+	<div
+		id="jsmeModal"
+		class="modal hidden"
+		role="dialog"
+		aria-modal="true">
+
+		<div class="modal-window">
+
+			<div class="modal-header">
+
+				<h2>Draw Molecule</h2>
+
+				<button
+					id="closeJsme"
+					class="modal-close">
+
+					✕
+
+				</button>
+
+			</div>
+
+			<div class="modal-body">
+
+				<div id="jsme_container"></div>
+
+			</div>
+
+			<div class="modal-footer">
+
+				<button
+					id="cancelJsme"
+					class="draw">
+
+					Cancel
+
+				</button>
+
+				<button
+					id="applyJsme"
+					class="run">
+
+					Add to Batch
+
+				</button>
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- =====================================
+		 Scripts
+	===================================== -->
+
+	<script src="js/version.js"></script>
+	<script src="js/components.js"></script>
+
+	<script src="backend/api/jsme/jsme/jsme.nocache.js"></script>
+
+	<script src="js/api.js"></script>
+	<script src="js/validation.js"></script>
+	<script src="js/export.js"></script>
+	<script src="js/jsme.js"></script>
+	<script src="js/workbench.js"></script>
+</body>
+
+</html>
