@@ -1,6 +1,12 @@
 console.log("1 - workbench.js loaded");
 
 /* =====================================
+   Session
+===================================== */
+
+const sessionResults = [];
+
+/* =====================================
    Research Workbench
 ===================================== */
 
@@ -20,15 +26,74 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     }
 
-    runButton.addEventListener("click", runPrediction);
+	runButton.addEventListener("click", runPrediction);
+
+	document
+		.getElementById("exportCSV")
+		?.addEventListener("click", () => {
+
+			Export.downloadCSV(sessionResults);
+
+		});
+
+	document
+		.getElementById("exportJSON")
+		?.addEventListener("click", () => {
+
+			Export.downloadJSON(sessionResults);
+
+		});
+
+	document
+		.getElementById("printResults")
+		?.addEventListener("click", printResults);
+
+	document
+		.getElementById("clearResults")
+		?.addEventListener("click", () => {
+
+			if (!confirm("Clear all prediction results?"))
+				return;
+
+			sessionResults.length = 0;
+
+			clearResults();
+
+		});
 
     console.log("4 - Click handler attached");
 
     console.log("5 - Loading models...");
 
-    await loadModels();
+	await loadModels();
 
-    console.log("6 - Models loaded");
+	initializeModelParameters();
+
+	/* =====================================
+	   SMILES Input
+	===================================== */
+
+	const textarea = document.getElementById("smilesBatch");
+
+	if (textarea) {
+
+		textarea.addEventListener("mousedown", (event) => {
+
+			if (textarea.value.length === 0) {
+
+				event.preventDefault();
+
+				textarea.focus();
+
+				textarea.setSelectionRange(0, 0);
+
+			}
+
+		});
+
+	}
+
+	console.log("6 - Models loaded");
 
 });
 
@@ -98,6 +163,48 @@ async function loadModels() {
 }
 
 /* =====================================
+   Model Parameters
+===================================== */
+
+function initializeModelParameters() {
+
+    const model =
+        document.getElementById("predictionModel");
+
+    if (!model)
+        return;
+
+    model.addEventListener(
+        "change",
+        updateModelParameters
+    );
+
+    updateModelParameters();
+
+}
+
+function updateModelParameters() {
+
+    const model =
+        document.getElementById("predictionModel");
+
+    const parameters =
+        document.getElementById("modelParameters");
+
+    if (!model || !parameters)
+        return;
+
+    parameters.classList.toggle(
+
+        "hidden",
+
+        model.value !== "enthalpy-fusion"
+
+    );
+
+}
+
+/* =====================================
    Prediction
 ===================================== */
 
@@ -127,15 +234,26 @@ async function runPrediction() {
 
     }
 
-    clearResults();
-
-    const results = [];
-
     const modelSelect =
         document.getElementById("predictionModel");
 
-    const selectedModel =
-        modelSelect.options[modelSelect.selectedIndex].text;
+    const selectedOption =
+        modelSelect.options[modelSelect.selectedIndex];
+
+	const selectedModel = {
+
+		id: selectedOption.value,
+		name: selectedOption.text
+
+	};
+
+	const temperature = Number(
+
+		document.getElementById(
+			"predictionTemperature"
+		)?.value || 298.15
+
+	);
 
     for (const smiles of smilesList) {
 
@@ -149,7 +267,10 @@ async function runPrediction() {
 
                 smiles,
                 formula: "—",
-                logP: "—",
+                model: selectedModel.name,
+                property: "—",
+                value: "—",
+                units: "—",
                 status: validation.message
 
             });
@@ -162,43 +283,94 @@ async function runPrediction() {
 
             console.log("17 - Predicting:", smiles);
 
-            const response = await API.predictLogP(smiles);
+            let result;
 
-            console.log("18 - Prediction:", response);
+            switch (selectedModel.id) {
 
-            const result = {
+                case "mflogp": {
 
-                smiles,
+                    const response =
+                        await API.predictLogP(smiles);
 
-                formula: response.prediction.formula,
+                    console.log("18 - LogP Prediction:", response);
 
-                model: selectedModel,
+                    result = {
 
-                property: "LogP",
+                        smiles,
 
-                value: Number(response.prediction.logP).toFixed(3),
+                        formula: response.prediction.formula,
 
-                units: "",
+                        model: selectedModel.name,
 
-                confidence: "",
+                        property: "LogP",
 
-                status: "Complete"
+                        value: Number(
+                            response.prediction.logP
+                        ).toFixed(3),
 
-            };
+                        units: "—",
 
-            results.push(result);
+                        confidence: "—",
 
-            addResultRow({
+                        status: "Complete"
 
-                smiles: result.smiles,
+                    };
 
-                formula: result.formula,
+                    break;
 
-                logP: result.value,
+                }
 
-                status: result.status
+                case "enthalpy-fusion": {
 
-            });
+					const response =
+						await API.predictEnthalpyFusion(
+
+							smiles,
+
+							temperature
+
+						);
+
+                    console.log("18 - Fusion Prediction:", response);
+
+                    result = {
+
+                        smiles,
+
+                        formula: response.prediction.formula,
+
+                        model: selectedModel.name,
+
+                        property: "ΔHfus",
+						temperature: temperature,
+						value: Number(
+							response.prediction.value
+						).toFixed(2),
+
+                        units: "kJ/mol",
+
+                        confidence:
+                            `± ${Number(response.prediction.uncertainty).toFixed(2)}`,
+
+                        status: "Complete"
+
+                    };
+
+                    break;
+
+                }
+
+                default:
+
+                    throw new Error(
+                        `Unsupported model: ${selectedModel.id}`
+                    );
+
+            }
+
+            sessionResults.push(result);
+
+            addResultRow(result);
 
         }
 
@@ -210,7 +382,10 @@ async function runPrediction() {
 
                 smiles,
                 formula: "—",
-                logP: "—",
+                model: selectedModel.name,
+                property: "—",
+                value: "—",
+                units: "—",
                 status: error.message
 
             });
@@ -218,19 +393,6 @@ async function runPrediction() {
         }
 
     }
-
-	const exportCSV =
-		document.getElementById("exportCSV").checked;
-
-	const exportJSON =
-		document.getElementById("exportJSON").checked;
-
-    if (exportCSV)
-        Export.downloadCSV(results);
-
-    if (exportJSON)
-        Export.downloadJSON(results);
-
 }
 
 /* =====================================
@@ -264,12 +426,138 @@ function addResultRow(result) {
     row.innerHTML = `
 
         <td>${result.smiles}</td>
-        <td>${result.formula}</td>
-        <td>${result.logP}</td>
+        <td>${result.model}</td>
+        <td>${result.property}</td>
+        <td>${result.temperature != null ? `${Number(result.temperature).toFixed(2)} K` : "—"}</td>
+        <td>${result.value}</td>
+        <td>${result.units}</td>
         <td>${result.status}</td>
 
     `;
 
     table.appendChild(row);
+
+}
+
+/* =====================================
+   Print
+===================================== */
+
+function printResults() {
+
+    const table =
+        document.querySelector(".downloads-table");
+
+    if (!table)
+        return;
+
+    const model =
+        document.getElementById("predictionModel")
+        ?.selectedOptions[0]?.text ?? "Unknown";
+
+    const temperature =
+        document.getElementById("predictionTemperature")
+        ?.value ?? "N/A";
+
+    const now = new Date().toLocaleString();
+
+    const printWindow = window.open("", "_blank");
+
+    printWindow.document.write(`
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>WPI Predict Report</title>
+
+<style>
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    margin:40px;
+
+    color:#222;
+
+}
+
+h1{
+
+    margin-bottom:6px;
+
+}
+
+.info{
+
+    margin-bottom:24px;
+
+    line-height:1.7;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th,
+td{
+
+    border:1px solid #999;
+
+    padding:8px;
+
+    text-align:left;
+
+}
+
+th{
+
+    background:#eeeeee;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>WPI Predict</h1>
+
+<div class="info">
+
+<strong>Prediction Report</strong><br>
+
+Generated: ${now}<br>
+
+Model: ${model}<br>
+
+Temperature: ${temperature} K
+
+</div>
+
+${table.outerHTML}
+
+</body>
+
+</html>
+
+`);
+
+    printWindow.document.close();
+
+    printWindow.focus();
+
+    printWindow.print();
+
+    printWindow.close();
 
 }

@@ -1247,3 +1247,129 @@ textarea:focus{
     border-top:1px solid var(--border);
 
 }
+
+.parameter-row{
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:6px;
+
+}
+
+.parameter-row input{
+
+    flex:1;
+	text-align: right;
+    height:var(--control-height);
+
+    padding:0 16px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+
+    color:var(--text);
+
+    font:inherit;
+
+    outline:none;
+
+    transition:var(--transition);
+
+}
+
+.parameter-row input:hover{
+
+    border-color:var(--draw-hover);
+
+}
+
+.parameter-row input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:var(--focus-ring);
+
+}
+
+.parameter-unit{
+
+    font-weight:600;
+
+    color:var(--muted);
+
+    min-width:18px;
+
+}
+
+/* =====================================
+   Prediction Results
+===================================== */
+
+.results-container{
+
+    max-height:420px;
+
+    overflow-y:auto;
+
+    margin-top:18px;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+}
+
+.results-container .downloads-table{
+
+    margin-top:0;
+
+}
+
+.results-container thead th{
+
+    position:sticky;
+
+    top:0;
+
+    background:var(--surface);
+
+    z-index:1;
+
+}
+
+/* =====================================
+   Results Actions
+===================================== */
+
+/* =====================================
+   Results Actions
+===================================== */
+
+.results-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-top:18px;
+
+    flex-wrap:wrap;
+
+}
+
+.results-actions button{
+
+    flex:0 0 160px;
+
+    height:44px;
+
+}

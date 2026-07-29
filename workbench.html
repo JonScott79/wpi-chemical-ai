@@ -93,8 +93,7 @@
 					<textarea
 						id="smilesBatch"
 						rows="10"
-						placeholder="CCO&#10;O&#10;c1ccccc1&#10;CC(C)O">
-					</textarea>
+						placeholder="SMILES FORMULA"></textarea>
 
 					<button
 						id="drawButton"
@@ -121,24 +120,50 @@
 
 						</select>
 
+						<div id="modelParameters" class="settings-group hidden">
+
+							<h3>Model Parameters</h3>
+
+							<div class="parameter">
+
+								<label for="predictionTemperature">
+
+									Temperature
+
+								</label>
+
+								<div class="parameter-row">
+
+									<input
+										id="predictionTemperature"
+										type="number"
+										value="0"
+										step="0.01">
+
+									<span class="parameter-unit">K</span>
+
+								</div>
+
+								<small>
+
+									Required for Enthalpy of Fusion predictions.
+
+								</small>
+
+							</div>
+
+						</div>
+
 						<div class="settings-group">
 
-							<h3>Output</h3>
+							<h3>Session</h3>
 
-							<label>
-								<input
-									id="exportCSV"
-									type="checkbox"
-									checked>
-								Export CSV
-							</label>
+							<p>
 
-							<label>
-								<input
-									id="exportJSON"
-									type="checkbox">
-								Export JSON
-							</label>
+								Prediction results remain available for the
+								current session until cleared.
+
+							</p>
 
 						</div>
 
@@ -179,75 +204,70 @@
 
 				<h2>Prediction Results</h2>
 
-				<table class="downloads-table">
+				<div class="results-container">
+					<table class="downloads-table">
 
-					<thead>
+						<thead>
 
-						<tr>
+							<tr>
 
-							<th>SMILES</th>
+								<th>SMILES</th>
+								<th>Model</th>
+								<th>Property</th>
+								<th>Temperature</th>
+								<th>Value</th>
+								<th>Units</th>
+								<th>Status</th>
 
-							<th>Formula</th>
+							</tr>
 
-							<th>LogP</th>
+						</thead>
 
-							<th>Status</th>
+						<tbody id="resultsTable">
 
-						</tr>
+						</tbody>
 
-					</thead>
-
-					<tbody id="resultsTable">
-
-					</tbody>
-
-				</table>
-
+					</table>
+				</div>
 			</div>
 			
-			<!-- =====================================
-				 Jobs
-			====================================== -->
+			<div class="results-actions">
 
-			<div class="info-box" style="margin-top:20px;">
+				<button
+					id="exportCSV"
+					class="draw"
+					type="button">
 
-				<h2>Job Queue</h2>
+					Export CSV
 
-				<p>
+				</button>
 
-					Batch jobs will appear here while processing.
+				<button
+					id="exportJSON"
+					class="draw"
+					type="button">
 
-				</p>
+					Export JSON
 
-				<table class="downloads-table">
+				</button>
 
-					<thead>
+				<button
+					id="printResults"
+					class="draw"
+					type="button">
 
-						<tr>
+					Print
 
-							<th>Job</th>
-							<th>Status</th>
-							<th>Progress</th>
+				</button>
 
-						</tr>
+				<button
+					id="clearResults"
+					class="run"
+					type="button">
 
-					</thead>
+					Clear Results
 
-					<tbody>
-
-						<tr>
-
-							<td>No Active Jobs</td>
-
-							<td>—</td>
-
-							<td>—</td>
-
-						</tr>
-
-					</tbody>
-
-				</table>
+				</button>
 
 			</div>
 

@@ -19,6 +19,7 @@ const Export = {
             "Formula",
             "Model",
             "Property",
+            "Temperature",
             "Value",
             "Units",
             "Confidence",
@@ -32,6 +33,9 @@ const Export = {
             result.formula,
             result.model,
             result.property,
+            result.temperature != null
+                ? `${Number(result.temperature).toFixed(2)} K`
+                : "—",
             result.value,
             result.units,
             result.confidence,
