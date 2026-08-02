@@ -1,0 +1,9 @@
+# =====================================
+# WPI Predict
+# Robots.txt
+# =====================================
+
+User-agent: *
+Allow: /
+
+Sitemap: https://predict.wpi.edu/sitemap.xml

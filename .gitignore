@@ -6,6 +6,10 @@ node_modules/
 dist/
 coverage/
 
+# Package manager caches
+.npm/
+.pnpm-store/
+
 # =====================================
 # Python
 # =====================================
@@ -15,6 +19,7 @@ venv/
 env/
 
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *.pyo
 *.pyd
@@ -68,3 +73,41 @@ Desktop.ini
 *.tmp
 *.temp
 *.bak
+
+# =====================================
+# Python / ML
+# =====================================
+
+.ipynb_checkpoints/
+
+# Training checkpoints (keep final inference models)
+*.ckpt
+*.pt.tmp
+*.pth.tmp
+
+# Caches
+cache/
+data/
+
+# =====================================
+# Build / Runtime
+# =====================================
+
+.netlify/
+.vite/
+
+# Runtime uploads
+uploads/
+
+# SQLite databases
+*.db
+*.sqlite3
+
+# =====================================
+# Archives
+# =====================================
+
+*.zip
+*.tar
+*.gz
+*.7z
