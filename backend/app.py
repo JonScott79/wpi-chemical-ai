@@ -234,8 +234,6 @@ def predict_enthalpy_fusion(request: EnthalpyFusionRequest):
             tnt_smiles = "Cc1c([N+](=O)[O-])cc([N+](=O)[O-])c([N+](=O)[O-])1"
             if request.smiles.strip().lower() == tnt_smiles.lower():
 
-            if request.smiles.strip() == tnt_smiles:
-
                 raise HTTPException(
 
                     status_code=400,
