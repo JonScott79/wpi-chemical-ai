@@ -1,3 +1,29 @@
+## [1.0.2] - 2026-08-03
+
+### Fixed
+
+#### Fusion GNN
+
+- Restored the missing `raw_features_tuned.pkl` model artifact required for inference.
+- Re-enabled Enthalpy of Fusion predictions.
+- Corrected Fusion model initialization during backend startup.
+- Added defensive backend error handling for unavailable prediction models.
+- Replaced an unhandled `IndexError` with meaningful API responses when model artifacts are unavailable.
+
+### Changed
+
+- Improved deployment validation for machine learning model artifacts.
+- Updated backend initialization diagnostics for prediction models.
+
+### Infrastructure
+
+- Verified complete deployment of all Fusion GNN model artifacts to the production server.
+- Confirmed successful production inference for both available prediction models.
+
+### Release Summary
+
+Version **1.0.2** restores full production functionality for the Fusion GNN predictor by deploying the missing model artifact required during initialization. Both the MFLOGP and Fusion GNN models are now fully operational on the production WPI Predict platform.
+
 ## [1.0.1] - 2026-08-03
 
 ### Added
@@ -88,11 +114,10 @@ The WPI Predict platform has reached its first production-ready release and has 
 
 ### Known Issues
 
-- Fusion predictor currently reports **Ready: False** because the required artifact:
-
+- The Fusion predictor is currently unavailable because the required model artifact
   `models/EnthalpyOfFusion/raw_features_tuned.pkl`
-
-  has not yet been deployed.
+  was omitted from the original model package. The artifact has been identified and will be restored in the next maintenance release.
+  **Resolved in Version 1.0.2**
 
 - Existing serialized machine learning models generate scikit-learn version compatibility warnings and should be regenerated using the finalized production training environment.
 

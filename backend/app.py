@@ -187,6 +187,22 @@ def predict_enthalpy_fusion(request: EnthalpyFusionRequest):
 
     try:
 
+        #
+        # Predictor failed to initialize.
+        #
+
+        if not fusion_predictor.ready:
+
+            raise HTTPException(
+
+                status_code=503,
+                detail=(
+                    "Fusion model is unavailable. "
+                    "Required model artifacts are missing."
+                )
+
+            )
+
         results = fusion_predictor.predict_batch(
 
             [request.smiles],
@@ -194,7 +210,18 @@ def predict_enthalpy_fusion(request: EnthalpyFusionRequest):
 
         )
 
-        print("Predict Batch Returned:", results)
+        #
+        # Predictor returned nothing.
+        #
+
+        if not results:
+
+            raise HTTPException(
+
+                status_code=503,
+                detail="Fusion predictor returned no results."
+
+            )
 
         result = results[0]
 
@@ -230,8 +257,10 @@ def predict_enthalpy_fusion(request: EnthalpyFusionRequest):
     except Exception as ex:
 
         raise HTTPException(
+
             status_code=500,
             detail=str(ex)
+
         )
 
 
