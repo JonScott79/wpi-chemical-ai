@@ -1,3 +1,31 @@
+## [1.0.3] - 2026-08-03
+
+### Added
+
+#### Research Workbench
+
+- CSV prediction import support.
+- Improved JSON prediction import support.
+- Automatic extraction of SMILES structures from exported prediction files.
+- Full round-trip workflow support (Export → Import → Predict).
+
+### Changed
+
+- Improved batch file parsing for CSV, JSON, and TXT formats.
+- Enhanced import compatibility with exported WPI Predict result files.
+- Refined automatic batch prediction workflow after importing files.
+
+### Fixed
+
+- Fixed JSON imports displaying `[object Object]` when loading exported prediction files.
+- Fixed CSV imports incorrectly pasting entire rows instead of extracting SMILES structures.
+- Improved validation and parsing of imported molecular datasets.
+- Corrected import behavior for previously exported prediction results.
+
+### Release Summary
+
+Version **1.0.3** completes the Workbench import/export workflow, allowing researchers to seamlessly import previously exported prediction files, continue batch analyses, and work with CSV, JSON, and TXT molecular datasets using a consistent interface.
+
 ## [1.0.2] - 2026-08-03
 
 ### Fixed

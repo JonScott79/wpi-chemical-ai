@@ -609,10 +609,55 @@ async function loadInputFile(file) {
 
 function parseCSV(text) {
 
-    return text
+    const lines = text
         .split(/\r?\n/)
         .map(line => line.trim())
-        .filter(line => line.length > 0)
+        .filter(line => line.length > 0);
+
+    if (lines.length === 0)
+        return "";
+
+    //
+    // Find the SMILES column.
+    //
+
+    const header = lines[0]
+        .split(",")
+        .map(column => column.trim().replace(/^"|"$/g, ""));
+
+    const smilesIndex = header.findIndex(
+
+        column => column.toLowerCase() === "smiles"
+
+    );
+
+    //
+    // Exported prediction CSV.
+    //
+
+    if (smilesIndex !== -1) {
+
+        return lines
+            .slice(1)
+            .map(line => {
+
+                const columns = line.split(",");
+
+                return columns[smilesIndex]
+                    ?.trim()
+                    .replace(/^"|"$/g, "");
+
+            })
+            .filter(Boolean)
+            .join("\n");
+
+    }
+
+    //
+    // Simple one-column CSV.
+    //
+
+    return lines
         .filter(line => !/^smiles$/i.test(line))
         .join("\n");
 
@@ -622,18 +667,60 @@ function parseJSON(text) {
 
     const json = JSON.parse(text);
 
-    if (Array.isArray(json))
+    //
+    // Array of strings
+    //
+
+    if (
+        Array.isArray(json) &&
+        json.every(item => typeof item === "string")
+    ) {
+
         return json.join("\n");
 
-    if (json.molecules)
-        return json.molecules
-            .map(m => m.smiles)
+    }
+
+    //
+    // Array of prediction objects
+    //
+
+    if (
+        Array.isArray(json) &&
+        json.every(item => typeof item === "object")
+    ) {
+
+        return json
+            .map(item => item.smiles)
+            .filter(Boolean)
             .join("\n");
 
-    if (json.predictions)
+    }
+
+    //
+    // Molecule list
+    //
+
+    if (json.molecules) {
+
+        return json.molecules
+            .map(m => m.smiles)
+            .filter(Boolean)
+            .join("\n");
+
+    }
+
+    //
+    // Prediction export
+    //
+
+    if (json.predictions) {
+
         return json.predictions
             .map(p => p.smiles)
+            .filter(Boolean)
             .join("\n");
+
+    }
 
     throw new Error("Unsupported JSON format.");
 
