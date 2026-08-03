@@ -227,6 +227,31 @@ def predict_enthalpy_fusion(request: EnthalpyFusionRequest):
 
         if result is None:
 
+            #
+            # Easter Egg :)
+            #
+
+            tnt_smiles = "Cc1c([N+](=O)[O-])cc([N+](=O)[O-])c([N+](=O)[O-])1"
+            if request.smiles.strip().lower() == tnt_smiles.lower():
+
+            if request.smiles.strip() == tnt_smiles:
+
+                raise HTTPException(
+
+                    status_code=400,
+                    detail=(
+                        "═══════════════════════════════════════\n"
+                        "💥 ACHIEVEMENT UNLOCKED 💥\n\n"
+                        "YOU BLEW UP THE AI!\n\n"
+                        "...Just kidding. 😄\n\n"
+                        "The molecular descriptor engine couldn't\n"
+                        "generate features for TNT.\n\n"
+                        "No neural networks were harmed.\n"
+                        "═══════════════════════════════════════"
+                    )
+
+                )
+
             raise HTTPException(
 
                 status_code=400,
