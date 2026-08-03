@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	await loadModels();
 
 	initializeModelParameters();
+	initializeFileImport();
 
 	/* =====================================
 	   SMILES Input
@@ -436,6 +437,205 @@ function addResultRow(result) {
     `;
 
     table.appendChild(row);
+
+}
+
+/* =====================================
+   File Import
+===================================== */
+
+function initializeFileImport() {
+
+    const dropZone =
+        document.getElementById("dropZone");
+
+    const fileInput =
+        document.getElementById("fileInput");
+
+    const browseButton =
+        document.getElementById("browseFiles");
+
+    const filename =
+        document.getElementById("selectedFile");
+
+    if (!dropZone)
+        return;
+
+    browseButton.addEventListener("click", () => {
+
+        fileInput.click();
+
+    });
+
+    fileInput.addEventListener("change", () => {
+
+        if (fileInput.files.length === 0)
+            return;
+
+        loadInputFile(fileInput.files[0]);
+
+    });
+
+    ["dragenter","dragover"].forEach(event => {
+
+        dropZone.addEventListener(event, e => {
+
+            e.preventDefault();
+
+            dropZone.classList.add("drag-over");
+
+        });
+
+    });
+
+    ["dragleave","dragend","drop"].forEach(event => {
+
+        dropZone.addEventListener(event, e => {
+
+            e.preventDefault();
+
+            dropZone.classList.remove("drag-over");
+
+        });
+
+    });
+
+    dropZone.addEventListener("drop", e => {
+
+        const file = e.dataTransfer.files[0];
+
+        if (!file)
+            return;
+
+        loadInputFile(file);
+
+    });
+
+}
+
+async function loadInputFile(file) {
+
+    const textarea =
+        document.getElementById("smilesBatch");
+
+    const filename =
+        document.getElementById("selectedFile");
+
+    const extension =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+    try {
+
+        const text = await file.text();
+
+        switch (extension) {
+
+            case "txt":
+
+                textarea.value =
+                    text.trim();
+
+                break;
+
+            case "csv":
+
+                textarea.value =
+                    parseCSV(text);
+
+                break;
+
+            case "json":
+
+                textarea.value =
+                    parseJSON(text);
+
+                break;
+
+            default:
+
+                alert(
+                    "Unsupported file type.\n\n" +
+                    "Please select a CSV, TXT, or JSON file."
+                );
+
+                return;
+
+        }
+
+        /* =====================================
+           Count Molecules
+        ===================================== */
+
+        const moleculeCount =
+            textarea.value
+                .split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .length;
+
+        filename.value =
+            `${file.name} (${moleculeCount} molecule${moleculeCount === 1 ? "" : "s"})`;
+
+        if (moleculeCount === 0) {
+
+            alert("The selected file does not contain any molecules.");
+
+            return;
+
+        }
+
+        /* =====================================
+           Auto Run Prediction
+        ===================================== */
+
+        await runPrediction();
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to read the selected file.\n\n" +
+            "Please verify the file format and try again."
+        );
+
+    }
+
+}
+
+function parseCSV(text) {
+
+    return text
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(line => line.length > 0)
+        .filter(line => !/^smiles$/i.test(line))
+        .join("\n");
+
+}
+
+function parseJSON(text) {
+
+    const json = JSON.parse(text);
+
+    if (Array.isArray(json))
+        return json.join("\n");
+
+    if (json.molecules)
+        return json.molecules
+            .map(m => m.smiles)
+            .join("\n");
+
+    if (json.predictions)
+        return json.predictions
+            .map(p => p.smiles)
+            .join("\n");
+
+    throw new Error("Unsupported JSON format.");
 
 }
 

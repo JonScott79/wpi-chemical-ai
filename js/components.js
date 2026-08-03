@@ -59,13 +59,11 @@ function initializeActivePage(){
             .split("/")
             .pop() || "index.html";
 
-    document.querySelectorAll("nav > a").forEach(link => {
+    document.querySelectorAll("nav a").forEach(link => {
 
         if(link.getAttribute("href") === currentPage){
 
             link.classList.add("active");
-
-            link.removeAttribute("href");
 
             link.setAttribute(
                 "aria-current",

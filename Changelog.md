@@ -1,3 +1,36 @@
+## [1.0.1] - 2026-08-03
+
+### Added
+
+#### Research Workbench
+
+- Drag-and-drop file import support.
+- JSON import support.
+- TXT import support.
+- Automatic prediction execution after file import.
+- Molecule count displayed after importing batch files.
+- Improved batch import validation and error handling.
+
+#### Accessibility
+
+- Improved WCAG accessibility compliance across the website.
+- Enhanced keyboard navigation.
+- Improved screen reader compatibility.
+- Added accessibility metadata and ARIA enhancements where appropriate.
+- Improved focus handling for interactive controls.
+
+### Changed
+
+- Updated Workbench upload interface to support multiple input formats.
+- Improved batch import workflow by reducing manual steps.
+- Refined user feedback during file import.
+- General accessibility and usability improvements throughout the site.
+
+### Fixed
+
+- Various accessibility issues identified during compliance review.
+- Minor interface consistency improvements.
+
 ## [1.0.0] - 2026-08-03
 
 ### 🎉 Initial Production Release

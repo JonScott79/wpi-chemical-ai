@@ -7,14 +7,65 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("WPI Predict Platform Ready");
 
     const runButton = document.getElementById("runPrediction");
-
     const predictionModal = document.getElementById("predictionModal");
-
     const outputContent = document.getElementById("outputContent");
 
-    /* =====================================
-       Run Prediction
-    ====================================== */
+    if (!runButton) {
+        console.log("Prediction elements not found on this page.");
+        return;
+    }
+
+    let focusedElementBeforeModal = null;
+
+    function trapFocus(e) {
+        const isTabPressed = e.key === "Tab";
+        const isEscPressed = e.key === "Escape";
+
+        if (isEscPressed) {
+            closePrediction();
+            return;
+        }
+
+        if (!isTabPressed) {
+            return;
+        }
+
+        const focusableElements = predictionModal.querySelectorAll('button, [tabindex="0"]');
+        const firstFocusableElement = focusableElements[0];
+        const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) { // Shift + Tab
+            if (document.activeElement === firstFocusableElement) {
+                lastFocusableElement.focus();
+                e.preventDefault();
+            }
+        } else { // Tab
+            if (document.activeElement === lastFocusableElement) {
+                firstFocusableElement.focus();
+                e.preventDefault();
+            }
+        }
+    }
+
+    function openPrediction() {
+        focusedElementBeforeModal = document.activeElement;
+        predictionModal.classList.remove("hidden");
+
+        requestAnimationFrame(() => {
+            const closeBtn = document.getElementById("closePrediction");
+            if (closeBtn) closeBtn.focus();
+        });
+
+        predictionModal.addEventListener("keydown", trapFocus);
+    }
+
+    function closePrediction() {
+        predictionModal.classList.add("hidden");
+        predictionModal.removeEventListener("keydown", trapFocus);
+        if (focusedElementBeforeModal) {
+            focusedElementBeforeModal.focus();
+        }
+    }
 
     runButton.addEventListener("click", () => {
 
@@ -27,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!result.valid)
             return;
 
-        predictionModal.classList.remove("hidden");
+        openPrediction();
 
         outputContent.innerHTML = `
 
@@ -80,12 +131,6 @@ Waiting for backend prediction models.
     /* =====================================
        Close Prediction Modal
     ====================================== */
-
-    function closePrediction() {
-
-        predictionModal.classList.add("hidden");
-
-    }
 
     document
     .getElementById("closePrediction")

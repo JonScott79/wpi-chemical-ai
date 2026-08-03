@@ -27,12 +27,52 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     const drawButton = document.getElementById("drawButton");
+    if (!drawButton) {
+        return;
+    }
+
     const closeButton = document.getElementById("closeJsme");
     const cancelButton = document.getElementById("cancelJsme");
     const applyButton = document.getElementById("applyJsme");
 
+    let focusedElementBeforeModal = null;
+
     // Always start hidden
     modal.classList.add("hidden");
+
+    /* ================================
+       Keyboard / Focus Trap
+    ================================= */
+
+    function trapFocus(e) {
+        const isTabPressed = e.key === "Tab";
+        const isEscPressed = e.key === "Escape";
+
+        if (isEscPressed) {
+            closeModal();
+            return;
+        }
+
+        if (!isTabPressed) {
+            return;
+        }
+
+        const focusableElements = modal.querySelectorAll('button, [tabindex="0"]');
+        const firstFocusableElement = focusableElements[0];
+        const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) { // Shift + Tab
+            if (document.activeElement === firstFocusableElement) {
+                lastFocusableElement.focus();
+                e.preventDefault();
+            }
+        } else { // Tab
+            if (document.activeElement === lastFocusableElement) {
+                firstFocusableElement.focus();
+                e.preventDefault();
+            }
+        }
+    }
 
     /* ================================
        Open Editor
@@ -40,7 +80,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
     drawButton.addEventListener("click", () => {
 
+        focusedElementBeforeModal = document.activeElement;
         modal.classList.remove("hidden");
+
+        requestAnimationFrame(() => {
+            closeButton.focus();
+        });
+
+        modal.addEventListener("keydown", trapFocus);
 
         // Only create the editor once
         if (!jsmeApplet) {
@@ -68,6 +115,11 @@ window.addEventListener("DOMContentLoaded", () => {
     function closeModal() {
 
         modal.classList.add("hidden");
+        modal.removeEventListener("keydown", trapFocus);
+
+        if (focusedElementBeforeModal) {
+            focusedElementBeforeModal.focus();
+        }
 
     }
 

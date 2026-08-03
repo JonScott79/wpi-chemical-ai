@@ -194,6 +194,8 @@
 
 <body>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Shared Header -->
 
     <div id="header-placeholder"></div>
@@ -202,7 +204,7 @@
          Main Content
     ====================================== -->
 
-	 <main>
+	 <main id="main-content">
 
 		<section class="information">
 
@@ -241,21 +243,39 @@
 
 					<h2>Input</h2>
 
-					<div class="input-group">
+				<div
+					id="dropZone"
+					class="input-group"
+					role="region"
+					aria-label="File upload drop zone">
 
-						<input
-							type="text"
-							placeholder="Drag & Drop CSV or Browse Files..."
-							readonly>
+					<input
+						id="selectedFile"
+						type="text"
+						placeholder="Drag & Drop CSV, TXT or JSON..."
+						aria-label="Selected file status"
+						role="status"
+						aria-live="polite"
+						readonly>
 
-						<button class="draw">
+					<input
+						id="fileInput"
+						type="file"
+						accept=".csv,.txt,.json"
+						aria-label="Upload molecular dataset"
+						hidden>
 
-							Browse
+					<button
+						id="browseFiles"
+						class="draw"
+						type="button"
+						aria-label="Browse files to upload">
 
-						</button>
+						Browse
 
-					</div>
+					</button>
 
+				</div>
 					<label for="smilesBatch" style="margin-top:16px; display:block; font-weight:600;">
 						Paste one SMILES structure per line
 					</label>
@@ -284,6 +304,7 @@
 
 					<div class="settings-content">
 
+						<label for="predictionModel" style="font-weight: 600; display: block; margin-bottom: 8px;">Select Prediction Model</label>
 						<select id="predictionModel">
 
 							<option>Loading Models...</option>
@@ -308,13 +329,14 @@
 										id="predictionTemperature"
 										type="number"
 										value="0"
-										step="0.01">
+										step="0.01"
+										aria-describedby="temperatureHelp">
 
 									<span class="parameter-unit">K</span>
 
 								</div>
 
-								<small>
+								<small id="temperatureHelp">
 
 									Required for Enthalpy of Fusion predictions.
 
