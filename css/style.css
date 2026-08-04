@@ -1601,40 +1601,33 @@ textarea:focus{
    Research Publications Table
 ===================================== */
 
-.downloads-table{
+table.downloads-table{
 
 	width:100%;
+
+}
+
+.research-downloads{
 
 	table-layout:fixed;
 
 }
 
-
-.downloads-table th:first-child,
-.downloads-table td:first-child{
+.research-downloads th:first-child,
+.research-downloads td:first-child{
 
 	width:75%;
 
 }
 
-
-.downloads-table th:last-child,
-.downloads-table td:last-child{
+.research-downloads th:last-child,
+.research-downloads td:last-child{
 
 	width:25%;
 
 	text-align:center;
 
 	vertical-align:middle;
-
-}
-
-
-.document-type{
-
-	font-weight:600;
-
-	color:var(--text-color);
 
 }
 
