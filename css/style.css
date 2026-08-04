@@ -1071,6 +1071,36 @@ nav a:focus-visible,
    Research Downloads
 ===================================== */
 
+.downloads-table a{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:var(--transition);
+
+}
+
+
+.downloads-table a:hover{
+
+    text-decoration:underline;
+
+}
+
+
+.downloads-table a:focus-visible{
+
+    outline:var(--focus-ring-outline);
+
+    outline-offset:4px;
+
+    border-radius:4px;
+
+}
+
 .downloads-table{
 
     width:100%;
@@ -1205,12 +1235,12 @@ nav a:focus-visible,
 textarea{
 
     width:100%;
-    min-height:160px;
+	min-height:120px;
+
+	padding:12px;
 
     margin-top:10px;
     margin-bottom:16px;
-
-    padding:16px;
 
     resize:vertical;
 
@@ -1259,7 +1289,6 @@ textarea:focus{
 #runBatchPrediction{
 
     width:100%;
-    margin-top:auto;
 
 }
 
@@ -1452,10 +1481,93 @@ textarea:focus{
     height:44px;
 
 }
-
 /* =====================================
-   Drag & Drop
+   Dataset Drop Zone
 ===================================== */
+
+.dataset-dropzone{
+
+	display:flex;
+
+	flex-direction:column;
+
+	align-items:center;
+
+	justify-content:center;
+
+	gap:10px;
+
+	min-height:120px;
+
+	padding:16px;
+
+	border:2px dashed var(--border);
+
+	border-radius:var(--radius);
+
+	background:rgba(255,255,255,.65);
+
+	text-align:center;
+
+	transition:var(--transition);
+
+	cursor:pointer;
+
+}
+
+
+.dataset-dropzone:hover,
+.dataset-dropzone.drag-over{
+
+	border-color:var(--primary);
+
+	background:rgba(180,38,38,.06);
+
+}
+
+
+.upload-icon{
+
+	font-size:2.2rem;
+
+	line-height:1;
+
+}
+
+
+.upload-title{
+
+	margin:0;
+
+	font-size:1rem;
+
+	font-weight:700;
+
+	color:var(--text);
+
+}
+
+
+.upload-subtitle{
+
+	margin:0;
+
+	color:var(--muted);
+
+	font-size:.9rem;
+
+}
+
+
+#selectedFile{
+
+	font-weight:600;
+
+	color:var(--primary);
+
+	font-size:.9rem;
+
+}
 
 .drag-over{
 
@@ -1466,5 +1578,234 @@ textarea:focus{
     box-shadow:var(--focus-ring);
 
     transition:var(--transition);
+
+}
+
+/* =====================================
+   Research Document Type
+===================================== */
+
+.downloads-table td:last-child{
+
+	text-align:center;
+
+	width:100px;
+
+	font-weight:700;
+
+	font-size:0.9rem;
+
+}
+
+/* =====================================
+   Research Publications Table
+===================================== */
+
+.downloads-table{
+
+	width:100%;
+
+	table-layout:fixed;
+
+}
+
+
+.downloads-table th:first-child,
+.downloads-table td:first-child{
+
+	width:75%;
+
+}
+
+
+.downloads-table th:last-child,
+.downloads-table td:last-child{
+
+	width:25%;
+
+	text-align:center;
+
+	vertical-align:middle;
+
+}
+
+
+.document-type{
+
+	font-weight:600;
+
+	color:var(--text-color);
+
+}
+
+/* =====================================
+   Dataset Upload Button
+===================================== */
+
+.dataset-dropzone .draw{
+
+	width:180px;
+
+	height:var(--control-height);
+
+	border:none;
+
+	border-radius:var(--radius);
+
+	background:var(--draw);
+
+	color:var(--text);
+
+}
+
+
+.dataset-dropzone .draw:hover{
+
+	background:var(--draw-hover);
+
+}
+
+/* =====================================
+   Input Labels
+===================================== */
+
+.input-label{
+
+	margin-top:16px;
+
+	display:block;
+
+	font-weight:700;
+
+	color:var(--text);
+
+}
+
+
+.input-help{
+
+	margin-top:16px;
+
+	margin-bottom:8px;
+
+	color:var(--muted);
+
+	font-size:.9rem;
+
+	font-weight:600;
+
+}
+
+/* =====================================
+   SMILES Input Group
+===================================== */
+
+.smiles-input-group{
+
+	display:flex;
+
+	flex-direction:column;
+
+	width:100%;
+
+}
+
+
+.smiles-input-group textarea{
+
+	margin:0;
+
+	border-radius:
+		var(--radius)
+		var(--radius)
+		0
+		0;
+
+	border-bottom:none;
+
+}
+
+
+.smiles-input-group button{
+
+	margin:0;
+
+	height:var(--control-height);
+
+	border-radius:
+		0
+		0
+		var(--radius)
+		var(--radius);
+
+	background:var(--primary);
+
+	color:var(--button-text);
+
+	border:none;
+
+}
+
+
+/* =====================================
+   SMILES Group Focus Styling
+===================================== */
+
+.smiles-input-group textarea:focus,
+.smiles-input-group textarea:focus-visible{
+
+	outline:none !important;
+
+	border-color:var(--primary);
+
+	box-shadow:var(--focus-ring);
+
+}
+
+
+.smiles-input-group textarea:hover{
+
+	border-color:var(--border);
+
+}
+
+/* =====================================
+   Input Divider
+===================================== */
+
+.input-divider{
+
+	display:flex;
+
+	align-items:center;
+
+	justify-content:center;
+
+	margin:20px 0;
+
+	color:var(--muted);
+
+	font-weight:700;
+
+}
+
+
+.input-divider::before,
+.input-divider::after{
+
+	content:"";
+
+	flex:1;
+
+	height:1px;
+
+	background:var(--border);
+
+}
+
+
+.input-divider span{
+
+	padding:0 14px;
 
 }

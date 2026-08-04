@@ -1,3 +1,48 @@
+## [1.0.4] - 2026-08-04
+
+### Changed
+
+#### Research Workbench
+
+- Redesigned the molecular input workflow based on researcher usability feedback.
+- Updated the Workbench layout to prioritize SMILES entry as the primary input method.
+- Improved separation between individual molecule prediction and batch dataset processing workflows.
+- Replaced the previous upload input presentation with a dedicated drag-and-drop dataset upload area.
+- Added clearer visual separation between SMILES input and dataset upload options.
+- Updated SMILES input controls with improved grouping, spacing, and visual consistency.
+- Refined Workbench component hierarchy and spacing for improved usability.
+
+#### Research Repository
+
+- Updated the Research page layout to better support future publication growth.
+- Removed placeholder research category panels and simplified the publication repository presentation.
+- Improved publication table formatting and document organization.
+- Added clearer document type presentation for downloadable research papers.
+
+#### Team
+
+- Added researcher profile information and photo support for project contributors.
+- Expanded team presentation for faculty, researchers, and student contributors.
+
+#### Version Management
+
+- Added version number linking from the website footer to release documentation.
+- Updated centralized version configuration to include changelog location.
+
+### Fixed
+
+#### User Experience
+
+- Fixed confusion between SMILES input fields and dataset upload controls.
+- Improved first-time user understanding of available input workflows.
+- Corrected inconsistent spacing and alignment within Workbench input components.
+- Improved connected input/button styling for SMILES entry controls.
+- Refined hover and focus behavior for custom Workbench controls.
+
+### Release Summary
+
+Version **1.0.4** improves the WPI Predict user experience by refining the Research Workbench workflow, clarifying molecular input options, and improving research documentation presentation. This release incorporates usability improvements based on researcher interaction and prepares the platform for future expansion with additional datasets, publications, and computational tools.
+
 ## [1.0.3] - 2026-08-03
 
 ### Added

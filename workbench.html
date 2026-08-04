@@ -243,56 +243,58 @@
 
 					<h2>Input</h2>
 
-				<div
-					id="dropZone"
-					class="input-group"
-					role="region"
-					aria-label="File upload drop zone">
 
-					<input
-						id="selectedFile"
-						type="text"
-						placeholder="Drag & Drop CSV, TXT or JSON..."
-						aria-label="Selected file status"
-						role="status"
-						aria-live="polite"
-						readonly>
+					<p class="input-help">
+						Enter SMILES structures below, one per line.
+					</p>
 
-					<input
-						id="fileInput"
-						type="file"
-						accept=".csv,.txt,.json"
-						aria-label="Upload molecular dataset"
-						hidden>
+					<div class="smiles-input-group">
+<!-- This is like this for a reason!!!!! -->
+<textarea
+	id="smilesBatch"
+	placeholder="Example: 
+CCO
+C1=CC=CC=C1"></textarea>
+<!-- End weird indentation -->
 
-					<button
-						id="browseFiles"
-						class="draw"
-						type="button"
-						aria-label="Browse files to upload">
+						<button
+							id="drawButton"
+							class="run">
+							Draw Molecule
+						</button>
+					</div>
 
-						Browse
+					<div class="input-divider">
 
-					</button>
+						<span>OR</span>
 
-				</div>
-					<label for="smilesBatch" style="margin-top:16px; display:block; font-weight:600;">
-						Paste one SMILES structure per line
-					</label>
+					</div>
 
-					<textarea
-						id="smilesBatch"
-						rows="10"
-						placeholder="SMILES FORMULA"></textarea>
 
-					<button
-						id="drawButton"
-						class="run"
-						type="button">
+					<div id="dropZone" class="dataset-dropzone">
 
-						Draw Molecule
+						<div class="upload-icon">
+							📁
+						</div>
 
-					</button>
+						<p class="upload-title">
+							Drop Dataset Here
+						</p>
+
+						<p class="upload-subtitle">
+							CSV, TXT, or JSON files
+						</p>
+
+						<button
+							id="browseFiles"
+							class="draw"
+							type="button">
+							Browse Files
+						</button>
+
+						<span id="selectedFile"></span>
+
+					</div>
 
 				</div>
 
