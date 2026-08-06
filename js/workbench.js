@@ -128,6 +128,27 @@ async function loadModels() {
 
         select.innerHTML = "";
 
+        /* =====================================
+           Placeholder
+        ===================================== */
+
+        const placeholder = document.createElement("option");
+
+        placeholder.value = "";
+
+        placeholder.textContent =
+            "Select Prediction Model";
+
+        placeholder.selected = true;
+
+        placeholder.disabled = true;
+
+        select.appendChild(placeholder);
+
+        /* =====================================
+           Prediction Models
+        ===================================== */
+
         for (const model of models) {
 
             console.log("11 - Adding:", model);
@@ -143,6 +164,8 @@ async function loadModels() {
 
         }
 
+        select.selectedIndex = 0;
+
         console.log("12 - Finished populating dropdown");
 
     }
@@ -156,6 +179,10 @@ async function loadModels() {
         const option = document.createElement("option");
 
         option.textContent = "Unable to load models";
+
+        option.disabled = true;
+
+        option.selected = true;
 
         select.appendChild(option);
 
@@ -192,16 +219,147 @@ function updateModelParameters() {
     const parameters =
         document.getElementById("modelParameters");
 
-    if (!model || !parameters)
+    const placeholder =
+        document.getElementById("modelPlaceholder");
+
+    if (!model || !parameters || !placeholder)
         return;
 
-    parameters.classList.toggle(
+    parameters.classList.add("hidden");
+    placeholder.classList.remove("hidden");
 
-        "hidden",
+    switch (model.value) {
 
-        model.value !== "enthalpy-fusion"
+        case "":
 
-    );
+            placeholder.innerHTML = `
+
+                <p class="model-placeholder-title">
+
+                    Select a prediction model.
+
+                </p>
+
+                <p>
+
+                    Additional model-specific
+                    parameters will appear here
+                    after a prediction model
+                    has been selected.
+
+                </p>
+
+            `;
+
+            break;
+
+        case "mflogp":
+
+            placeholder.innerHTML = `
+
+                <p class="model-placeholder-title">
+
+                    No additional configuration required.
+
+                </p>
+
+                <p>
+
+                    The selected LogP prediction
+                    model does not require any
+                    additional parameters.
+
+                </p>
+
+            `;
+
+            break;
+
+        case "enthalpy-fusion":
+
+            placeholder.classList.add("hidden");
+            parameters.classList.remove("hidden");
+
+            break;
+
+        default:
+
+            placeholder.innerHTML = `
+
+                <p class="model-placeholder-title">
+
+                    Model configuration unavailable.
+
+                </p>
+
+                <p>
+
+                    Configuration options for this
+                    prediction model are still
+                    under development.
+
+                </p>
+
+            `;
+
+            break;
+
+    }
+
+}
+
+/* =====================================
+   Status Window
+===================================== */
+
+let statusTimer = null;
+
+function showStatus(message){
+
+    const window =
+        document.getElementById("statusWindow");
+
+    const label =
+        document.getElementById("statusMessage");
+
+    if(!window || !label)
+        return;
+
+    clearTimeout(statusTimer);
+
+    label.textContent = message;
+
+    window.classList.remove("hidden");
+
+    requestAnimationFrame(() => {
+
+        window.classList.add("visible");
+
+    });
+
+}
+
+function hideStatus(delay = 1500){
+
+    const window =
+        document.getElementById("statusWindow");
+
+    if(!window)
+        return;
+
+    clearTimeout(statusTimer);
+
+    statusTimer = setTimeout(() => {
+
+        window.classList.remove("visible");
+
+        setTimeout(() => {
+
+            window.classList.add("hidden");
+
+        },250);
+
+    },delay);
 
 }
 
@@ -212,6 +370,7 @@ function updateModelParameters() {
 async function runPrediction() {
 
     console.log("13 - runPrediction()");
+	showStatus("Running Prediction...");
 
     const textarea = document.getElementById("smilesBatch");
 
@@ -220,20 +379,20 @@ async function runPrediction() {
     if (!textarea)
         return;
 
-    const smilesList = textarea.value
-        .split("\n")
-        .map(smiles => smiles.trim())
-        .filter(smiles => smiles.length > 0);
+	const inputList = textarea.value
+		.split("\n")
+		.map(input => input.trim())
+		.filter(input => input.length > 0);
 
-    console.log("15 - SMILES:", smilesList);
+	console.log("15 - Input:", inputList);
 
-    if (smilesList.length === 0) {
+	if(inputList.length === 0){
 
-        alert("Please enter at least one SMILES structure.");
+		alert("Please enter at least one molecule.");
 
-        return;
+		return;
 
-    }
+	}
 
     const modelSelect =
         document.getElementById("predictionModel");
@@ -256,7 +415,51 @@ async function runPrediction() {
 
 	);
 
-    for (const smiles of smilesList) {
+    for(const input of inputList){
+
+    console.log("Resolving:", input);
+
+    const resolved = await resolveCompound(input);
+
+    if(!resolved.success){
+
+        addResultRow({
+
+            smiles: input,
+
+            model: selectedModel.name,
+
+            property: "—",
+
+            value: "—",
+
+            units: "—",
+
+            status: resolved.message
+
+        });
+
+        continue;
+
+    }
+	
+	showStatus("Prediction Complete");
+
+	hideStatus();
+
+    const smiles = resolved.smiles;
+
+	const originalInput = input;
+
+    console.log({
+
+		input,
+
+		resolvedSmiles: smiles,
+
+		detectedType: resolved.detectedType
+
+	});
 
         const validation = validateSmiles(smiles);
 
@@ -378,6 +581,10 @@ async function runPrediction() {
         catch (error) {
 
             console.error("Prediction failed:", error);
+
+			showStatus("Prediction Failed");
+
+			hideStatus(3000);
 
             addResultRow({
 

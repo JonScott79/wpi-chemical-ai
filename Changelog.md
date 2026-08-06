@@ -1,3 +1,70 @@
+## [1.0.5] - 2026-08-05
+
+### Added
+
+#### Research Workbench
+
+- Added backend-powered chemical name resolution using the PubChem PUG REST API.
+- Added automatic molecular formula lookup from common chemical names.
+- Added compound disambiguation support when multiple matching compounds are returned.
+- Added researcher-friendly selection dialog for ambiguous compound names.
+- Added loading status overlay with progress feedback while predictions are running.
+- Added prediction completion notifications to improve researcher workflow.
+
+#### Research Publications
+
+- Redesigned the Research Publications section using publication cards.
+- Added publication preview images using graphical abstracts and representative figures.
+- Added publication author listings.
+- Added journal and publication year metadata.
+- Added dedicated publication action buttons for future online paper pages.
+- Added direct PDF download buttons for published papers.
+- Prepared publication architecture for future paper detail pages.
+- Organized publication assets using reusable preview image structure.
+
+### Changed
+
+#### Research Workbench
+
+- Reorganized the prediction workflow into a guided step-by-step process.
+- Moved model selection to the first step of the prediction workflow.
+- Added dynamic model-specific parameter panel.
+- Improved prediction workflow to better match researcher expectations.
+- Moved the primary prediction action adjacent to molecular input.
+- Repositioned the molecular drawing tool as a secondary action.
+- Added keyboard shortcut support:
+  - Enter executes predictions.
+  - Shift + Enter inserts a new line within the input area.
+- Improved prediction status feedback throughout the application.
+- Updated prediction layout to better separate model configuration from prediction results.
+
+#### Research Repository
+
+- Replaced the publication table with responsive publication cards.
+- Improved publication presentation using representative graphics instead of document lists.
+- Enhanced research repository scalability for future publications.
+- Refined publication layout for improved readability and visual consistency.
+
+#### Infrastructure
+
+- Updated frontend communication with the new backend compound resolution service.
+- Refactored compound resolution to support multiple returned candidate compounds.
+- Improved frontend/backend integration for future chemistry data providers.
+
+### Fixed
+
+#### Research Workbench
+
+- Fixed compound resolution failures caused by ambiguous chemical names.
+- Improved handling of multiple PubChem search results.
+- Improved prediction feedback during long-running inference requests.
+- Corrected Workbench layout alignment following workflow redesign.
+- Improved responsiveness of publication and Workbench layouts.
+
+### Release Summary
+
+Version **1.0.5** significantly improves both the WPI Predict Research Workbench and Research Repository. Researchers now receive real-time prediction feedback, improved compound resolution with ambiguity handling, and a redesigned guided prediction workflow. The Research page has been transformed into a publication-centered repository featuring graphical abstracts, publication metadata, and a scalable architecture for future research outputs.
+
 ## [1.0.4] - 2026-08-04
 
 ### Changed

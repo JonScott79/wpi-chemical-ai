@@ -17,7 +17,7 @@
 
 	<meta
 		name="description"
-		content="WPI Predict is a research platform developed at Worcester Polytechnic Institute for machine learning-based molecular property prediction using SMILES chemical structures. Explore predictive models, computational chemistry research, and the Research Workbench.">
+		content="WPI Predict is a machine learning research platform developed at Worcester Polytechnic Institute for molecular property prediction using SMILES chemical structures. Predict molecular properties, explore research models, and accelerate computational chemistry workflows.">
 
 	<meta
 		name="author"
@@ -49,7 +49,7 @@
 
 	<meta
 		property="og:description"
-		content="Academic research platform for molecular property prediction using machine learning and SMILES chemical structures.">
+		content="Predict molecular properties using machine learning models developed at Worcester Polytechnic Institute. WPI Predict provides an interactive research platform supporting computational chemistry and cheminformatics.">
 
 	<meta
 		property="og:url"
@@ -69,7 +69,7 @@
 
 	<meta
 		property="og:image:alt"
-		content="WPI Predict Research Platform">
+		content="WPI Predict Molecular Property Prediction Platform">
 
 	<meta
 		property="og:locale"
@@ -89,7 +89,7 @@
 
 	<meta
 		name="twitter:description"
-		content="Research platform for molecular property prediction using machine learning and SMILES chemical structures.">
+		content="Interactive research platform for predicting molecular properties using machine learning and SMILES chemical structures.">
 
 	<meta
 		name="twitter:image"
@@ -105,7 +105,7 @@
 		"@graph":
 		[
 			{
-				"@type": "WebSite",
+				"@type": "WebPage",
 
 				"name": "WPI Predict",
 
@@ -113,13 +113,13 @@
 
 				"description": "Machine learning platform for molecular property prediction developed at Worcester Polytechnic Institute.",
 
-				"publisher":
+				"isPartOf":
 				{
-					"@type": "Organization",
+					"@type": "WebSite",
 
-					"name": "Worcester Polytechnic Institute",
+					"name": "WPI Predict",
 
-					"url": "https://www.wpi.edu"
+					"url": "https://YOUR-FINAL-DOMAIN/"
 				}
 			},
 
@@ -134,7 +134,7 @@
 
 				"url": "https://YOUR-FINAL-DOMAIN/",
 
-				"description": "Research platform for machine learning-based molecular property prediction using SMILES chemical structures.",
+				"description": "Interactive research platform for predicting molecular properties using machine learning models and SMILES chemical structures.",
 
 				"creator":
 				{
@@ -144,6 +144,18 @@
 
 					"url": "https://www.wpi.edu"
 				},
+
+				"featureList":
+				[
+					"SMILES Prediction",
+					"Molecular Property Prediction",
+					"Machine Learning Models",
+					"Batch Prediction",
+					"Molecule Drawing",
+					"CSV Export",
+					"JSON Export",
+					"Prediction History"
+				],
 
 				"offers":
 				{
@@ -167,19 +179,17 @@
 		]
 	}
 	</script>
-
+	
 	<!-- =====================================
 		 Styles
 	===================================== -->
 
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Fonts -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 </head>
 
@@ -187,292 +197,410 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- =====================================
-     Header Component
-===================================== -->
+    <!-- Shared Header -->
 
-<div id="header-placeholder"></div>
-
-<!-- =====================================
-     Main
-===================================== -->
-
-<main id="main-content">
+    <div id="header-placeholder"></div>
 
     <!-- =====================================
-         Hero
+         Main Content
     ====================================== -->
 
-    <section class="hero">
+	 <main id="main-content">
 
-        <div class="intro">
+		<section class="information">
 
-            <h1>WPI Predict</h1>
+			<!-- =====================================
+				 Introduction
+			====================================== -->
 
-            <p class="tagline">
-                Machine Learning for Molecular Property Prediction
-            </p>
+			<div class="team-intro home-hero info-box">
 
-			<p>
+				<h1>WPI Predict</h1>
 
-				WPI Predict is a research platform developed at
-				<strong>Worcester Polytechnic Institute</strong> to advance
-				molecular property prediction through machine learning,
-				computational chemistry, and cheminformatics.
+				<p class="team-tagline">
+					Machine Learning for Molecular Property Prediction
+				</p>
 
-			</p>
+			</div>
 
-			<p>
+			<!-- =====================================
+				 Workspace
+			====================================== -->
 
-				The platform provides researchers with a unified environment for
-				evaluating predictive models, analyzing molecular structures,
-				and supporting computational chemistry workflows through a
-				modern web interface.
+			<div class="info-grid">
 
-			</p>
+				<!-- Input -->
 
-			<p>
+				<div class="info-box">
 
-				Designed as an extensible research platform, WPI Predict enables
-				new machine learning models, datasets, and scientific tools to
-				be integrated as research continues, creating a scalable
-				foundation for future discovery and collaboration.
+				<div class="step-label">
 
-			</p>
+					Step 1 • Select Prediction Model
 
-        </div>
+				</div>
+				<div class="settings-content">
 
-    </section>
+					<label
+						for="predictionModel"
+						style="font-weight:600;display:block;margin-bottom:8px;">
 
-    <!-- =====================================
-         Information
-    ====================================== -->
+						Select Prediction Model
 
-    <section class="information">
+					</label>
 
-        <div class="info-grid">
+					<select id="predictionModel">
 
-            <div class="info-box">
+						<option
+							value=""
+							selected
+							disabled>
 
-				<h2>Getting Started</h2>
+							Select Prediction Model
 
-				<ol>
+						</option>
 
-					<li>Open the <strong>Workbench</strong>.</li>
-					<li>Draw a molecule or enter a SMILES chemical structure.</li>
-					<li>Select one of the available prediction models.</li>
-					<li>Configure any required model parameters.</li>
-					<li>Run the prediction and review the calculated results.</li>
-					<li>Export results for further analysis if desired.</li>
+					</select>
 
-				</ol>
+					<div class="settings-group">
 
-            </div>
+							<h3>Model Configuration</h3>
 
-            <div class="info-box">
+							<div
+								id="modelPlaceholder"
+								class="model-placeholder">
 
-				<h2>Current Prediction Models</h2>
+							</div>
+
+							<div
+								id="modelParameters"
+								class="settings-group hidden">
+
+								<div class="parameter">
+
+									<label for="predictionTemperature">
+
+										Temperature
+
+									</label>
+
+									<div class="parameter-row">
+
+										<input
+											id="predictionTemperature"
+											type="number"
+											value="0"
+											step="0.01"
+											aria-describedby="temperatureHelp">
+
+										<span class="parameter-unit">
+
+											K
+
+										</span>
+
+									</div>
+
+									<small id="temperatureHelp">
+
+										Required for Enthalpy of Fusion predictions.
+
+									</small>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<!-- Settings -->
+
+				<div class="info-box">
+
+					<div class="step-label">
+
+						 Step 2 • Enter Molecules
+
+					</div>
+
+										<p class="input-help">
+						Enter a SMILES string or chemical name.
+					</p>
+
+					<div class="smiles-input-group">
+<!-- This is like this for a reason!!!!! -->
+<textarea
+	id="smilesBatch"
+	placeholder="Examples:
+CCO
+Ethanol"></textarea>
+<!-- End weird indentation -->
+
+						<div class="smiles-actions">
+
+							<button
+								id="drawButton"
+								class="draw"
+								type="button">
+
+								Draw Molecule
+
+							</button>
+
+							<button
+								id="runBatchPrediction"
+								class="run"
+								type="button">
+
+								Run Prediction
+
+							</button>
+
+						</div>
+					</div>
+
+					<div class="input-divider">
+
+						<span>OR</span>
+
+					</div>
+
+
+					<div id="dropZone" class="dataset-dropzone">
+
+						<div class="upload-icon">
+							📁
+						</div>
+
+						<p class="upload-title">
+							Drop Dataset Here
+						</p>
+
+						<p class="upload-subtitle">
+							CSV, TXT, or JSON files
+						</p>
+
+						<button
+							id="browseFiles"
+							class="draw"
+							type="button">
+							Browse Files
+						</button>
+
+						<span id="selectedFile"></span>
+
+					</div>
+
+				</div>
+
+					<!-- Prediction button moved to Step 3 -->
+
+				</div>
+			</div>
+			<!-- =====================================
+				 Prediction Workflow
+			====================================== -->
+
+			<div class="prediction-grid">
+
+				<!-- Results -->
+
+				<div class="info-box">
+
+					<div class="step-label">
+
+						Step 3 • Prediction Results
+
+					</div>
+
+					<div class="results-container">
+
+						<table class="downloads-table">
+
+							<thead>
+
+								<tr>
+
+									<th>SMILES</th>
+									<th>Model</th>
+									<th>Property</th>
+									<th>Temperature</th>
+									<th>Value</th>
+									<th>Units</th>
+									<th>Status</th>
+
+								</tr>
+
+							</thead>
+
+							<tbody id="resultsTable">
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+				</div>
+
+			</div>
+			
+			<div class="results-actions">
+
+				<button
+					id="exportCSV"
+					class="draw"
+					type="button">
+
+					Export CSV
+
+				</button>
+
+				<button
+					id="exportJSON"
+					class="draw"
+					type="button">
+
+					Export JSON
+
+				</button>
+
+				<button
+					id="printResults"
+					class="draw"
+					type="button">
+
+					Print
+
+				</button>
+
+				<button
+					id="clearResults"
+					class="run"
+					type="button">
+
+					Clear Results
+
+				</button>
+
+			</div>
+
+			<!-- =====================================
+				 Future
+			====================================== -->
+
+			<div class="seo">
+
+				<strong>Future Capabilities</strong>
 
 				<p>
 
-					WPI Predict currently provides several machine learning models
-					for estimating experimentally relevant molecular properties.
-					Additional prediction models will become available as ongoing
-					research continues.
+					WPI Predict is designed to grow alongside the
+					WPI Predict platform. Planned features include automatic
+					dataset validation, asynchronous job processing, result
+					history, downloadable reports, confidence metrics,
+					comparative model analysis, and support for researcher-
+					supplied prediction models.
 
 				</p>
 
-				<ul>
+			</div>
 
-					<li>LogP</li>
-					<li>Boiling Point</li>
-					<li>Melting Point</li>
-					<li>Enthalpy of Vaporization</li>
-					<li>Enthalpy of Fusion</li>
-					<li>Hansen Solubility Parameters</li>
+		</section>
 
-				</ul>
+	</main>
 
-            </div>
+	<!-- =====================================
+		 Status Window
+	===================================== -->
 
-        </div>
+	<div
+		id="statusWindow"
+		class="status-window hidden">
 
-        <div class="seo">
+		<div
+			id="statusMessage"
+			class="status-message">
 
-            <strong>Research Notice</strong>
+			Ready
 
-			<p>
+		</div>
 
-				WPI Predict is an academic research platform under active
-				development at Worcester Polytechnic Institute. The platform is
-				designed to support research, education, and collaboration in
-				computational chemistry through machine learning-based molecular
-				property prediction. Prediction results are intended to assist
-				research workflows and should not replace experimental
-				measurement or scientific validation.
+	</div>
+    <!-- Shared Footer -->
 
-			</p>
+    <div id="footer-placeholder"></div>
 
-        </div>
+	<!-- JSME Modal -->
 
-    </section>
+	<div
+		id="jsmeModal"
+		class="modal hidden"
+		role="dialog"
+		aria-modal="true">
 
-</main>
+		<div class="modal-window">
 
-<!-- =====================================
-     Footer Component
-===================================== -->
+			<div class="modal-header">
 
-<div id="footer-placeholder"></div>
+				<h2>Draw Molecule</h2>
 
-<!-- =====================================
-     Prediction Modal
-===================================== -->
+				<button
+					id="closeJsme"
+					class="modal-close">
 
-<div
-    id="predictionModal"
-    class="modal hidden"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="predictionTitle">
+					✕
 
-    <div class="modal-window">
+				</button>
 
-        <div class="modal-header">
+			</div>
 
-            <h2 id="predictionTitle">
-                Prediction Results
-            </h2>
+			<div class="modal-body">
 
-            <button
-                id="closePrediction"
-                class="modal-close"
-                type="button"
-                aria-label="Close prediction results">
+				<div id="jsme_container"></div>
 
-                ✕
+			</div>
 
-            </button>
+			<div class="modal-footer">
 
-        </div>
+				<button
+					id="cancelJsme"
+					class="draw">
 
-        <div class="modal-body">
+					Cancel
 
-            <div id="outputContent">
-                Waiting for prediction...
-            </div>
+				</button>
 
-        </div>
+				<button
+					id="applyJsme"
+					class="run">
 
-        <div class="modal-footer">
+					Add to Batch
 
-            <button
-                id="copyOutput"
-                class="draw"
-                type="button">
+				</button>
 
-                Copy
+			</div>
 
-            </button>
+		</div>
 
-            <button
-                id="printOutput"
-                class="draw"
-                type="button">
+	</div>
+	<!-- =====================================
+		 Scripts
+	===================================== -->
 
-                Print
+	<script src="js/version.js"></script>
+	<script src="js/components.js"></script>
 
-            </button>
+	<script src="backend/api/jsme/jsme/jsme.nocache.js"></script>
 
-            <button
-                id="closePredictionFooter"
-                class="run"
-                type="button">
-
-                Close
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =====================================
-     JSME Modal
-===================================== -->
-
-<div
-    id="jsmeModal"
-    class="modal hidden"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="jsmeTitle">
-
-    <div class="modal-window">
-
-        <div class="modal-header">
-
-            <h2 id="jsmeTitle">
-                Draw Molecule
-            </h2>
-
-            <button
-                id="closeJsme"
-                class="modal-close"
-                type="button"
-                aria-label="Close molecular editor">
-
-                ✕
-
-            </button>
-
-        </div>
-
-        <div class="modal-body">
-
-            <div id="jsme_container"></div>
-
-        </div>
-
-        <div class="modal-footer">
-
-            <button
-                id="cancelJsme"
-                class="draw"
-                type="button">
-
-                Cancel
-
-            </button>
-
-            <button
-                id="applyJsme"
-                class="run"
-                type="button">
-
-                Apply
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =====================================
-     Scripts
-===================================== -->
-<script src="backend/api/jsme/jsme/jsme.nocache.js"></script>
-<script src="js/jsme.js"></script>
-
-<script src="js/version.js"></script>
-<script src="js/components.js"></script>
-<script src="js/api.js"></script>
-<script src="js/validation.js"></script>
-<script src="js/app.js"></script>
-
+	<script src="js/api.js"></script>
+	<script src="js/validation.js"></script>
+	<script src="js/export.js"></script>
+	<script src="js/jsme.js"></script>
+	<script src="js/pubchem.js"></script>
+	<script src="js/workbench.js"></script>
 </body>
+
 </html>
