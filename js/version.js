@@ -17,7 +17,7 @@ const VERSION = {
 
     stage: "Production",
 
-    version: "1.0.6",
+    version: "1.0.7",
 
     codename: "WPI-Predict",
 

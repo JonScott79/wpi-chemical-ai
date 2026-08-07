@@ -1,3 +1,44 @@
+## [1.0.7] - 2026-08-07
+
+### Changed
+
+#### Project Cleanup
+
+* Removed legacy placeholder files and framework scaffolding no longer required by the production website.
+* Removed obsolete empty CSS files and simplified stylesheet loading across all website pages.
+* Replaced remaining production placeholder values with the correct `predict.wpi.edu` domain.
+* Removed unused images, legacy branding assets, and orphaned project resources.
+* Cleaned Python cache directories from the backend source tree.
+
+#### Search Engine Optimization
+
+* Verified canonical URLs across all public pages.
+* Verified Open Graph and Twitter metadata consistency.
+* Verified JSON-LD structured data references.
+* Verified `robots.txt` and `sitemap.xml` reference the production domain.
+* Completed a full project scan confirming no remaining references to the legacy `thermo-predict` branding within production source files.
+
+#### Build & Infrastructure
+
+* Performed a clean production build.
+* Verified generated production assets contain no remaining legacy branding references.
+* Simplified project structure by removing obsolete imports and unused framework artifacts.
+* Improved maintainability by eliminating dead files and unused resources.
+
+### Removed
+
+#### Legacy Assets
+
+* Removed unused placeholder documentation files created during initial project scaffolding.
+* Removed unused favicon and branding assets no longer referenced by the website.
+* Removed obsolete stylesheet references from all public pages.
+* Removed orphaned assets verified to have no remaining project references.
+
+### Release Summary
+
+Version **1.0.7** focuses on production cleanup, project maintenance, and SEO verification. Legacy placeholder files, unused assets, and obsolete stylesheet references were removed while canonical metadata, structured data, and generated production assets were verified for consistency. This release prepares the codebase for the final server-side domain migration and infrastructure updates.
+
+
 ## [1.0.6] - 2026-08-07
 
 ### Added
