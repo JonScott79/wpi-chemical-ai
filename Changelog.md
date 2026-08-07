@@ -2,6 +2,11 @@
 
 ### Added
 
+#### User Experience
+
+- Added a custom branded `404.html` page matching the WPI Predict visual identity.
+- Included a researcher-friendly navigation path back to the homepage when invalid URLs are requested.
+
 #### Analytics
 
 - Integrated Google Analytics 4 across the WPI Predict platform.
@@ -47,6 +52,7 @@
 - Improved SEO consistency across all primary website pages.
 - Updated the sitemap to remove obsolete page references.
 - Prepared the platform for production analytics reporting and search engine discovery.
+- Improved production error handling by replacing the default web server 404 response with a branded application page.
 
 ### Removed
 
