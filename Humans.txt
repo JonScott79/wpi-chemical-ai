@@ -1,0 +1,36 @@
+/* TEAM */
+
+Project:
+    WPI Predict
+
+Institution:
+    Worcester Polytechnic Institute
+
+Lead Developer:
+    Jon Scott
+    Website: https://lanzar.me
+
+Principal Investigator:
+    Dr. Michael Timko
+
+Research Team:
+    WPI Predict Research Group
+
+/* SITE */
+
+Standards:
+    HTML5, CSS3, JavaScript
+
+Components:
+    JSME Molecular Editor
+
+Technology:
+    Machine Learning
+    Computational Chemistry
+    REST API
+
+Repository:
+    Private
+
+Last Updated:
+    August 2026
