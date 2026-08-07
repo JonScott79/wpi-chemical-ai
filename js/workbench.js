@@ -12,6 +12,10 @@ const sessionResults = [];
 
 document.addEventListener("DOMContentLoaded", async () => {
 
+    if (window.WPI_Analytics) {
+        window.WPI_Analytics.Homepage.loaded();
+    }
+
     console.log("2 - DOMContentLoaded");
 
     const runButton = document.getElementById("runBatchPrediction");
@@ -32,6 +36,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 		.getElementById("exportCSV")
 		?.addEventListener("click", () => {
 
+			if (window.WPI_Analytics) {
+				window.WPI_Analytics.Workbench.resultsCopied("csv");
+			}
+
 			Export.downloadCSV(sessionResults);
 
 		});
@@ -39,6 +47,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 	document
 		.getElementById("exportJSON")
 		?.addEventListener("click", () => {
+
+			if (window.WPI_Analytics) {
+				window.WPI_Analytics.Workbench.resultsCopied("json");
+			}
 
 			Export.downloadJSON(sessionResults);
 
@@ -54,6 +66,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 			if (!confirm("Clear all prediction results?"))
 				return;
+
+			if (window.WPI_Analytics) {
+				window.WPI_Analytics.track("clear_results_clicked");
+			}
 
 			sessionResults.length = 0;
 
@@ -202,10 +218,37 @@ function initializeModelParameters() {
     if (!model)
         return;
 
+    let currentModelId = model.value;
+
     model.addEventListener(
         "change",
-        updateModelParameters
+        () => {
+            const oldId = currentModelId;
+            const newId = model.value;
+            const selectedName = model.options[model.selectedIndex]?.text ?? "";
+
+            if (window.WPI_Analytics) {
+                window.WPI_Analytics.Workbench.modelChanged(oldId, newId);
+                window.WPI_Analytics.Workbench.modelSelected(newId, selectedName);
+            }
+            currentModelId = newId;
+            updateModelParameters();
+        }
     );
+
+    const tempInput = document.getElementById("predictionTemperature");
+    if (tempInput) {
+        tempInput.addEventListener("change", () => {
+            if (window.WPI_Analytics) {
+                window.WPI_Analytics.Workbench.parameterChanged("temperature", tempInput.value);
+            }
+        });
+    }
+
+    if (window.WPI_Analytics && model.value) {
+        const selectedName = model.options[model.selectedIndex]?.text ?? "";
+        window.WPI_Analytics.Workbench.modelSelected(model.value, selectedName);
+    }
 
     updateModelParameters();
 
@@ -415,6 +458,15 @@ async function runPrediction() {
 
 	);
 
+	if (window.WPI_Analytics) {
+		window.WPI_Analytics.Workbench.predictionSubmitted(
+			selectedModel.id,
+			selectedModel.name,
+			inputList.length > 1 ? "batch" : "single",
+			temperature
+		);
+	}
+
     for(const input of inputList){
 
     console.log("Resolving:", input);
@@ -586,6 +638,14 @@ async function runPrediction() {
 
 			hideStatus(3000);
 
+			if (window.WPI_Analytics) {
+				window.WPI_Analytics.Workbench.predictionFailed(
+					selectedModel.id,
+					selectedModel.name,
+					error.message
+				);
+			}
+
             addResultRow({
 
                 smiles,
@@ -601,6 +661,14 @@ async function runPrediction() {
         }
 
     }
+
+	if (window.WPI_Analytics) {
+		window.WPI_Analytics.Workbench.predictionCompleted(
+			selectedModel.id,
+			selectedModel.name,
+			inputList.length
+		);
+	}
 }
 
 /* =====================================
@@ -938,6 +1006,10 @@ function parseJSON(text) {
 ===================================== */
 
 function printResults() {
+
+	if (window.WPI_Analytics) {
+		window.WPI_Analytics.Workbench.resultsPrinted();
+	}
 
     const table =
         document.querySelector(".downloads-table");

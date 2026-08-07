@@ -80,6 +80,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
     drawButton.addEventListener("click", () => {
 
+        if (window.WPI_Analytics) {
+            window.WPI_Analytics.Workbench.drawMoleculeClicked();
+        }
+
         focusedElementBeforeModal = document.activeElement;
         modal.classList.remove("hidden");
 
@@ -140,6 +144,13 @@ window.addEventListener("DOMContentLoaded", () => {
         }
 
         const smiles = jsmeApplet.smiles();
+
+        if (window.WPI_Analytics) {
+            if (smiles && smiles.trim() !== "") {
+                window.WPI_Analytics.Workbench.moleculeDrawn();
+            }
+            window.WPI_Analytics.Workbench.moleculeApplied();
+        }
 
         // Home page (single prediction)
         const singleInput = document.getElementById("smiles");

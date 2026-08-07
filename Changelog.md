@@ -1,3 +1,51 @@
+## [1.0.6] - 2026-08-07
+
+### Added
+
+#### Analytics
+
+- Integrated Google Analytics 4 across the WPI Predict platform.
+- Integrated Microsoft Clarity for session recordings, heatmaps, and interaction analysis.
+- Added centralized analytics architecture through `js/analytics.js`.
+- Added automated event tracking for navigation, publication downloads, DOI links, email links, and external resources.
+- Added Workbench analytics covering prediction sessions, model selection, parameter changes, molecule drawing, PubChem lookups, exports, printing, and researcher interactions.
+- Added publication visibility tracking using IntersectionObserver for accurate engagement metrics.
+- Added prediction timing metrics to measure time from page load to first prediction.
+
+#### Search Engine Optimization
+
+- Registered the website with Google Search Console.
+- Registered the website with Bing Webmaster Tools.
+- Submitted XML sitemap for search engine indexing.
+- Added production web application metadata including `application-name` and `apple-mobile-web-app-title`.
+- Updated the web application manifest with WPI Predict branding.
+
+### Changed
+
+#### Privacy & Security
+
+- Updated analytics implementation to prevent chemical names, SMILES strings, prediction values, and other research data from being transmitted to third-party analytics providers.
+- Analytics now transmit only interaction metadata required for usage reporting.
+
+#### Infrastructure
+
+- Centralized analytics into a shared implementation to simplify future maintenance.
+- Improved SEO consistency across all primary website pages.
+- Updated sitemap to remove obsolete page references.
+- Prepared the platform for production analytics reporting and search engine discovery.
+
+### Removed
+
+#### Code Cleanup
+
+- Removed legacy Workbench prediction modal implementation.
+- Removed obsolete JavaScript template files no longer used by the application.
+- Removed unused About page modal markup and legacy script references.
+
+### Release Summary
+
+Version **1.0.6** prepares WPI Predict for public launch by integrating production analytics, search engine indexing, privacy-focused telemetry, and infrastructure improvements. The platform now includes comprehensive usage analytics, researcher interaction tracking, improved SEO, and production-ready metadata while ensuring proprietary chemical information remains private.
+
 ## [1.0.5] - 2026-08-05
 
 ### Added

@@ -44,6 +44,17 @@ window.resolveCompound = async function(input){
 
     }
 
+    const isSmilesInput = isSmiles(value);
+    if (window.WPI_Analytics) {
+        window.WPI_Analytics.Workbench.chemicalInputMethod(isSmilesInput ? "smiles" : "chemical");
+        if (isSmilesInput) {
+            window.WPI_Analytics.track("smiles_entered");
+        } else {
+            window.WPI_Analytics.track("chemical_name_entered");
+            window.WPI_Analytics.Workbench.pubchemLookup(value.length, "started");
+        }
+    }
+
     const smiles = await resolveSmiles(value);
 
     if(!smiles.success){
@@ -132,6 +143,9 @@ async function resolveSmiles(input){
 
         if(!response.ok){
 
+            if (window.WPI_Analytics) {
+                window.WPI_Analytics.Workbench.pubchemLookup(input.length, "fail");
+            }
             return createError("Compound not found.");
 
         }
@@ -140,8 +154,15 @@ async function resolveSmiles(input){
 
         if(smiles.length === 0){
 
+            if (window.WPI_Analytics) {
+                window.WPI_Analytics.Workbench.pubchemLookup(input.length, "fail");
+            }
             return createError("Compound not found.");
 
+        }
+
+        if (window.WPI_Analytics) {
+            window.WPI_Analytics.Workbench.pubchemLookup(input.length, "success");
         }
 
         return{
@@ -157,6 +178,9 @@ async function resolveSmiles(input){
 
         console.error(error);
 
+        if (window.WPI_Analytics) {
+            window.WPI_Analytics.Workbench.pubchemLookup(input.length, "fail");
+        }
         return createError("Unable to contact resolver.");
 
     }
