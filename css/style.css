@@ -868,7 +868,7 @@ nav a:focus-visible,
 
 .validation.success{
 
-	color:#16a34a;
+	color:#166534;
 
 }
 
@@ -1383,9 +1383,11 @@ textarea:focus{
 
 }
 
+.settings-group h2,
 .settings-group h3{
 
 	margin:0;
+	margin-bottom:0;
 
 	color:var(--text);
 

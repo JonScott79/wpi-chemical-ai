@@ -295,7 +295,7 @@
 
 					<div class="settings-group">
 
-							<h3>Model Configuration</h3>
+							<h2>Model Configuration</h2>
 
 							<div
 								id="modelPlaceholder"
@@ -357,9 +357,9 @@
 
 					</div>
 
-										<p class="input-help">
-						Enter a SMILES string or chemical name.
-					</p>
+					<label for="smilesBatch" class="input-help" style="display: block;">
+						Enter a SMILES string or chemical name (Press Enter to predict. Shift+Enter inserts a new line).
+					</label>
 
 					<div class="smiles-input-group">
 <!-- This is like this for a reason!!!!! -->
@@ -401,6 +401,13 @@ Ethanol"></textarea>
 
 
 					<div id="dropZone" class="dataset-dropzone">
+
+						<input
+							id="fileInput"
+							type="file"
+							style="display: none;"
+							accept=".csv,.txt,.json"
+							aria-label="Upload dataset file">
 
 						<div class="upload-icon">
 							📁
